@@ -9,6 +9,8 @@ import dynamic from "next/dynamic";
 import JobList from "../src/utilities/db";
 import ControlMenu from "./components/ControlMenu";
 
+import "mapbox-gl/dist/mapbox-gl.css";
+
 const MapBoxGL = dynamic(() => import("./components/MapBoxGL"), {
   ssr: false,
 });

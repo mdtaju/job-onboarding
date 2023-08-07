@@ -1,4 +1,5 @@
 import JobList from "@/src/utilities/db";
+import Link from "next/link";
 
 import { useEffect, useRef, useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
@@ -113,29 +114,31 @@ const MapBoxGL = () => {
             style={{ padding: 0 }}>
             <div className=" bg-white space-y-2 p-3 h-[222px] overflow-scroll overflow-x-hidden rounded-lg">
               {jobData.map((job, i) => (
-                <div
-                  key={i}
-                  className="border border-gray-400 p-2 rounded-md flex items-center gap-2">
-                  {/* logo container start */}
-                  <div className="min-w-[44px] max-w-[44px] h-[44px] rounded-lg bg-black text-center flex items-center justify-center text-white translate-y-[1px]">
-                    {/* Logo div */}
-                    <div
-                      className="w-full h-full p-2 grid place-items-center"
-                      dangerouslySetInnerHTML={{
-                        __html: job.CompanyLogoSvg,
-                      }}
-                    />
-                  </div>
-                  {/* logo container end */}
-                  <div className="w-[120px]">
-                    <h4 className="text-sm whitespace-normal font-bold text-gray-800">
-                      {job.JobName}
-                    </h4>
-                    <div className="whitespace-nowrap text-xs text-gray-800 text-[14px] font-semibold flex items-center gap-2">
-                      <div className="w-[12px] h-[12px] bg-green-500 rounded-full"></div>
-                      {job.Salary}
+                <div key={i}>
+                  <Link href={"/job"}>
+                    <div className="border border-gray-400 p-2 rounded-md flex items-center gap-2">
+                      {/* logo container start */}
+                      <div className="min-w-[44px] max-w-[44px] h-[44px] rounded-lg bg-black text-center flex items-center justify-center text-white translate-y-[1px]">
+                        {/* Logo div */}
+                        <div
+                          className="w-full h-full p-2 grid place-items-center"
+                          dangerouslySetInnerHTML={{
+                            __html: job.CompanyLogoSvg,
+                          }}
+                        />
+                      </div>
+                      {/* logo container end */}
+                      <div className="w-[120px]">
+                        <h4 className="text-sm whitespace-normal font-bold text-gray-800">
+                          {job.JobName}
+                        </h4>
+                        <div className="whitespace-nowrap text-xs text-gray-800 text-[14px] font-semibold flex items-center gap-2">
+                          <div className="w-[12px] h-[12px] bg-green-500 rounded-full"></div>
+                          {job.Salary}
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>

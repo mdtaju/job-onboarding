@@ -1,8 +1,7 @@
 import JobList from "@/src/utilities/db";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
-
 // get lat long number
 function getLatLongNum(str) {
   return str.split(",");
@@ -12,12 +11,38 @@ const MapBoxGL = () => {
   const jobData = JobList;
   const [selectedJob, setSelectedJob] = useState(null);
   const mapRef = useRef(null);
+  const markerRef = useRef(null);
+  const markerBtnRef = useRef(null);
   const popRef = useRef(null);
   const [viewPort, setViewPort] = useState({
     latitude: 51.9198816454355,
     longitude: 4.478242294834028,
     zoom: 10,
   });
+
+  const moveHandler = (e) => {
+    // console.log(e);
+    // setSelectedJob(null);
+  };
+
+  useEffect(() => {
+    const popElement = document.getElementsByClassName("marker_btn");
+    document.addEventListener("click", function (event) {
+      let insideClick = false;
+      for (let i = 0; i < popElement.length; i++) {
+        const popEl = popElement[i];
+        const isClickInside = popEl.contains(event.target);
+        if (isClickInside) {
+          insideClick = true;
+          break;
+        }
+      }
+      if (!insideClick) {
+        setSelectedJob(null);
+      }
+    });
+  }, []);
+
   return (
     <div className="relative bg-white flex items-center justify-center w-full overflow-hidden rounded-xl h-[400px] lg4:h-[500px]">
       <ReactMapGL
@@ -26,6 +51,7 @@ const MapBoxGL = () => {
         style={{ width: "100%", height: "100%" }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+        onDrag={moveHandler}
         ref={(instance) => (mapRef.current = instance)}>
         {jobData?.map((job, i) => {
           const locationArr = getLatLongNum(job.CompanyLocation);
@@ -34,12 +60,11 @@ const MapBoxGL = () => {
               key={i}
               latitude={locationArr[0]}
               longitude={locationArr[1]}
-              // offsetLeft={-15}
-              // offsetTop={-15}
-              // className={highlightedId === job.id ? "marker-active" : ""}
-            >
+              ref={markerRef}>
               {/* company location */}
               <button
+                ref={markerBtnRef}
+                className="marker_btn"
                 style={{
                   width: "42px",
                   height: "42px",
@@ -50,7 +75,10 @@ const MapBoxGL = () => {
                   position: "relative",
                 }}
                 type="button"
-                onClick={() => setSelectedJob(job)}>
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedJob(job);
+                }}>
                 {/* job count badge */}
                 <div className="absolute top-[-10px] right-[-5px] rounded-full py-1 px-2 leading-none bg-white">
                   1
@@ -78,30 +106,38 @@ const MapBoxGL = () => {
             latitude={getLatLongNum(selectedJob.CompanyLocation)[0]}
             longitude={getLatLongNum(selectedJob.CompanyLocation)[1]}
             onClose={() => setSelectedJob(null)}
-            closeOnClick={false}>
-            <div className=" bg-white">
-              <div className="border border-gray-400 p-2 rounded-md flex items-center gap-2">
-                {/* logo container start */}
-                <div className="min-w-[44px] max-w-[44px] h-[44px] rounded-lg bg-black text-center flex items-center justify-center text-white translate-y-[1px]">
-                  {/* Logo div */}
-                  <div
-                    className="w-full h-full p-2 grid place-items-center"
-                    dangerouslySetInnerHTML={{
-                      __html: selectedJob.CompanyLogoSvg,
-                    }}
-                  />
-                </div>
-                {/* logo container end */}
-                <div className="w-[120px]">
-                  <h1 className="text-base truncate font-bold text-gray-800">
-                    {selectedJob.JobName}
-                  </h1>
-                  <div className="whitespace-nowrap text-gray-800 text-[14px] font-semibold flex items-center gap-2">
-                    <div className="w-[12px] h-[12px] bg-green-500 rounded-full"></div>
-                    {selectedJob.Salary}
+            closeOnClick={false}
+            closeButton={false}
+            offset={22}
+            className=" bg-transparent"
+            style={{ padding: 0 }}>
+            <div className=" bg-white space-y-2 p-3 h-[222px] overflow-scroll overflow-x-hidden rounded-lg">
+              {jobData.map((job, i) => (
+                <div
+                  key={i}
+                  className="border border-gray-400 p-2 rounded-md flex items-center gap-2">
+                  {/* logo container start */}
+                  <div className="min-w-[44px] max-w-[44px] h-[44px] rounded-lg bg-black text-center flex items-center justify-center text-white translate-y-[1px]">
+                    {/* Logo div */}
+                    <div
+                      className="w-full h-full p-2 grid place-items-center"
+                      dangerouslySetInnerHTML={{
+                        __html: job.CompanyLogoSvg,
+                      }}
+                    />
+                  </div>
+                  {/* logo container end */}
+                  <div className="w-[120px]">
+                    <h4 className="text-sm whitespace-normal font-bold text-gray-800">
+                      {job.JobName}
+                    </h4>
+                    <div className="whitespace-nowrap text-xs text-gray-800 text-[14px] font-semibold flex items-center gap-2">
+                      <div className="w-[12px] h-[12px] bg-green-500 rounded-full"></div>
+                      {job.Salary}
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </Popup>
         )}

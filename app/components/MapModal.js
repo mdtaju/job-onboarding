@@ -1,9 +1,8 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-// import { CircleMarker, MapContainer, TileLayer, Popup } from 'react-leaflet'
 import JobList from "@/src/utilities/db";
 import "leaflet/dist/leaflet.css";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 
 // get lat long number
@@ -64,8 +63,6 @@ const MapModal = (props) => {
     props.setModal(false);
   }
 
-  const position = [52.3676, 4.9041];
-
   return (
     <>
       {props.modal === false ? (
@@ -118,19 +115,6 @@ const MapModal = (props) => {
           props.modal === true ? "flex lg4:hidden" : "hidden"
         }`}>
         <div className="leaflet-container">
-          {/* old map start */}
-          {/* <MapContainer center={position} zoom={10} scrollWheelZoom={true}>
-                        <TileLayer
-                          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        <CircleMarker center={position}>
-                          <Popup>Hello World!</Popup>
-                        </CircleMarker>
-                      </MapContainer> */}
-          {/* old map end */}
-
-          {/* new map start */}
           <ReactMapGL
             {...viewPort}
             onMove={(e) => setViewPort(e.viewState)}

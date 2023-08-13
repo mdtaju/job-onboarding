@@ -45,7 +45,8 @@ const MapBoxGL = () => {
   }, []);
 
   const markerCenterHandler = useCallback((latitude, longitude) => {
-    mapRef.current?.flyTo({ center: [longitude, latitude], duration: 500 });
+    console.log(mapRef.current);
+    mapRef.current?.easeTo({ center: [longitude, latitude], duration: 500 });
   }, []);
 
   return (
@@ -118,17 +119,17 @@ const MapBoxGL = () => {
             className=" bg-transparent"
             style={{ padding: 0 }}>
             <div
-              className={`customScroll bg-white space-y-2 p-2 h-fit max-h-[223px] ${
+              className={`customScroll map_popup_scrollbar bg-white space-y-[6px] p-[6px] h-fit max-h-[186px] ${
                 selectedJob.jobs.length > 3
                   ? "overflow-scroll"
                   : "overflow-hidden"
               } overflow-x-hidden rounded-lg`}>
               {selectedJob.jobs.map((job, i) => (
                 <div key={i}>
-                  <Link href={"/job"}>
-                    <div className="hover:bg-gray-100 active:bg-gray-300 border border-gray-300 p-2 rounded-lg flex items-center gap-2">
+                  <Link href={"/job"} className="outline-none">
+                    <div className="hover:bg-gray-100 active:bg-gray-300 border border-gray-300 p-[6px] rounded-lg flex items-center gap-2">
                       {/* logo container start */}
-                      <div className="min-w-[44px] max-w-[44px] h-[44px] rounded-lg bg-black text-center flex items-center justify-center text-white translate-y-[1px]">
+                      <div className="min-w-[40px] max-w-[40px] h-[40px] rounded-lg bg-black text-center flex items-center justify-center text-white translate-y-[1px]">
                         {/* Logo div */}
                         <div
                           className="w-full h-full p-2 grid place-items-center"

@@ -82,6 +82,7 @@ body {
   border-radius: 7px !important;
 }
 
-/* .custom_scrollbar {
-
-} */
+/* map popup scrollbar */
+.map_popup_scrollbar::-webkit-scrollbar-thumb {
+  background: #cccbcb;
+}

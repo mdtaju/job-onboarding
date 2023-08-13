@@ -87,9 +87,11 @@ const MapBoxGL = () => {
                   setSelectedJob(job);
                 }}>
                 {/* job count badge */}
-                <div className="absolute top-[-10px] right-[-5px] rounded-full py-1 px-2 leading-none bg-white">
-                  {job.jobs.length > 9 ? "9+" : job.jobs.length}
-                </div>
+                {job.jobs.length > 1 && (
+                  <div className="absolute top-[-10px] right-[-5px] rounded-full py-1 px-2 leading-none bg-white">
+                    {job.jobs.length > 9 ? "9+" : job.jobs.length}
+                  </div>
+                )}
                 {/* home icon svg */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

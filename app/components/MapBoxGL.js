@@ -3,10 +3,6 @@ import Link from "next/link";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
-// get lat long number
-function getLatLongNum(str) {
-  return str.split(",");
-}
 
 const MapBoxGL = () => {
   const jobData = JobList;
@@ -20,11 +16,6 @@ const MapBoxGL = () => {
     longitude: 4.478242294834028,
     zoom: 10,
   });
-
-  const moveHandler = (e) => {
-    // console.log(e);
-    // setSelectedJob(null);
-  };
 
   useEffect(() => {
     const popElement = document.getElementsByClassName("marker_btn");
@@ -57,10 +48,8 @@ const MapBoxGL = () => {
         style={{ width: "100%", height: "100%" }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-        onDrag={moveHandler}
         ref={(instance) => (mapRef.current = instance)}>
         {jobData?.map((job, i) => {
-          // const locationArr = getLatLongNum(job.CompanyLocation);
           return (
             <Marker
               key={i}
@@ -107,6 +96,7 @@ const MapBoxGL = () => {
             </Marker>
           );
         })}
+
         {/* job popup */}
         {selectedJob && (
           <Popup
@@ -145,8 +135,8 @@ const MapBoxGL = () => {
                         <h4 className="text-sm whitespace-normal font-bold text-gray-800">
                           {job.JobName}
                         </h4>
-                        <div className="whitespace-nowrap text-xs text-gray-800 text-[14px] font-semibold flex items-center gap-2">
-                          <div className="w-[12px] h-[12px] bg-green-500 rounded-full"></div>
+                        <div className="whitespace-nowrap text-xs text-gray-800 text-[14px] font-semibold flex items-center gap-1">
+                          <div className="w-[8px] h-[8px] bg-green-500 rounded-full"></div>
                           {job.Salary}
                         </div>
                       </div>

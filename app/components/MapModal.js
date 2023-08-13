@@ -1,8 +1,8 @@
 "use client";
-import JobList from "@/src/utilities/db";
+import JobList from "@/src/utilities/jobs-example";
 import "leaflet/dist/leaflet.css";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 
 // get lat long number
@@ -57,6 +57,11 @@ const MapModal = (props) => {
         setSelectedJob(null);
       }
     });
+  }, []);
+
+  const markerCenterHandler = useCallback((latitude, longitude) => {
+    console.log(mapRef.current);
+    mapRef.current?.easeTo({ center: [longitude, latitude], duration: 500 });
   }, []);
 
   function closeModal() {
@@ -118,17 +123,19 @@ const MapModal = (props) => {
           <ReactMapGL
             {...viewPort}
             onMove={(e) => setViewPort(e.viewState)}
-            style={{ width: "100%", height: "100%" }}
             mapStyle="mapbox://styles/mapbox/streets-v9"
+            style={{ width: "100%", height: "100%" }}
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
             ref={(instance) => (mapRef.current = instance)}>
             {jobData?.map((job, i) => {
-              const locationArr = getLatLongNum(job.CompanyLocation);
               return (
                 <Marker
                   key={i}
-                  latitude={locationArr[0]}
-                  longitude={locationArr[1]}
+                  latitude={job.latitude}
+                  longitude={job.longitude}
+                  onClick={() =>
+                    markerCenterHandler(job.latitude, job.longitude)
+                  }
                   ref={markerRef}>
                   {/* company location */}
                   <button
@@ -137,7 +144,7 @@ const MapModal = (props) => {
                     style={{
                       width: "42px",
                       height: "42px",
-                      backgroundColor: job.ComapnyCategoryColour.toLowerCase(),
+                      backgroundColor: job.CategoryColour.toLowerCase(),
                       display: "grid",
                       placeItems: "center",
                       borderRadius: "50%",
@@ -149,9 +156,11 @@ const MapModal = (props) => {
                       setSelectedJob(job);
                     }}>
                     {/* job count badge */}
-                    <div className="absolute top-[-10px] right-[-5px] rounded-full py-1 px-2 leading-none bg-white">
-                      1
-                    </div>
+                    {job.jobs.length > 1 && (
+                      <div className="absolute top-[-10px] right-[-5px] rounded-full py-1 px-2 leading-none bg-white">
+                        {job.jobs.length > 9 ? "9+" : job.jobs.length}
+                      </div>
+                    )}
                     {/* home icon svg */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -167,26 +176,32 @@ const MapModal = (props) => {
                 </Marker>
               );
             })}
+
             {/* job popup */}
             {selectedJob && (
               <Popup
                 ref={popRef}
                 anchor="bottom"
-                latitude={getLatLongNum(selectedJob.CompanyLocation)[0]}
-                longitude={getLatLongNum(selectedJob.CompanyLocation)[1]}
+                latitude={selectedJob.latitude}
+                longitude={selectedJob.longitude}
                 onClose={() => setSelectedJob(null)}
                 closeOnClick={false}
                 closeButton={false}
                 offset={22}
                 className=" bg-transparent"
                 style={{ padding: 0 }}>
-                <div className=" bg-white space-y-2 p-3 h-[222px] overflow-scroll overflow-x-hidden rounded-lg">
-                  {jobData.map((job, i) => (
+                <div
+                  className={`customScroll map_popup_scrollbar bg-white space-y-[6px] p-[6px] h-fit max-h-[186px] ${
+                    selectedJob.jobs.length > 3
+                      ? "overflow-scroll"
+                      : "overflow-hidden"
+                  } overflow-x-hidden rounded-lg`}>
+                  {selectedJob.jobs.map((job, i) => (
                     <div key={i}>
-                      <Link href={"/job"}>
-                        <div className="border border-gray-400 p-2 rounded-md flex items-center gap-2">
+                      <Link href={"/job"} className="outline-none">
+                        <div className="hover:bg-gray-100 active:bg-gray-300 border border-gray-300 p-[6px] rounded-lg flex items-center gap-2">
                           {/* logo container start */}
-                          <div className="min-w-[44px] max-w-[44px] h-[44px] rounded-lg bg-black text-center flex items-center justify-center text-white translate-y-[1px]">
+                          <div className="min-w-[40px] max-w-[40px] h-[40px] rounded-lg bg-black text-center flex items-center justify-center text-white translate-y-[1px]">
                             {/* Logo div */}
                             <div
                               className="w-full h-full p-2 grid place-items-center"
@@ -200,8 +215,8 @@ const MapModal = (props) => {
                             <h4 className="text-sm whitespace-normal font-bold text-gray-800">
                               {job.JobName}
                             </h4>
-                            <div className="whitespace-nowrap text-xs text-gray-800 text-[14px] font-semibold flex items-center gap-2">
-                              <div className="w-[12px] h-[12px] bg-green-500 rounded-full"></div>
+                            <div className="whitespace-nowrap text-xs text-gray-800 text-[14px] font-semibold flex items-center gap-1">
+                              <div className="w-[8px] h-[8px] bg-green-500 rounded-full"></div>
                               {job.Salary}
                             </div>
                           </div>

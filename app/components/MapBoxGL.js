@@ -1,7 +1,7 @@
-import JobList from "@/src/utilities/db";
+import JobList from "@/src/utilities/jobs-example";
 import Link from "next/link";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 // get lat long number
 function getLatLongNum(str) {
@@ -44,6 +44,10 @@ const MapBoxGL = () => {
     });
   }, []);
 
+  const markerCenterHandler = useCallback((latitude, longitude) => {
+    mapRef.current?.flyTo({ center: [longitude, latitude], duration: 500 });
+  }, []);
+
   return (
     <div className="relative bg-white flex items-center justify-center w-full overflow-hidden rounded-xl h-[400px] lg4:h-[500px]">
       <ReactMapGL
@@ -55,12 +59,13 @@ const MapBoxGL = () => {
         onDrag={moveHandler}
         ref={(instance) => (mapRef.current = instance)}>
         {jobData?.map((job, i) => {
-          const locationArr = getLatLongNum(job.CompanyLocation);
+          // const locationArr = getLatLongNum(job.CompanyLocation);
           return (
             <Marker
               key={i}
-              latitude={locationArr[0]}
-              longitude={locationArr[1]}
+              latitude={job.latitude}
+              longitude={job.longitude}
+              onClick={() => markerCenterHandler(job.latitude, job.longitude)}
               ref={markerRef}>
               {/* company location */}
               <button
@@ -69,7 +74,7 @@ const MapBoxGL = () => {
                 style={{
                   width: "42px",
                   height: "42px",
-                  backgroundColor: job.ComapnyCategoryColour.toLowerCase(),
+                  backgroundColor: job.CategoryColour.toLowerCase(),
                   display: "grid",
                   placeItems: "center",
                   borderRadius: "50%",
@@ -82,7 +87,7 @@ const MapBoxGL = () => {
                 }}>
                 {/* job count badge */}
                 <div className="absolute top-[-10px] right-[-5px] rounded-full py-1 px-2 leading-none bg-white">
-                  1
+                  {job.jobs.length > 9 ? "9+" : job.jobs.length}
                 </div>
                 {/* home icon svg */}
                 <svg
@@ -104,19 +109,24 @@ const MapBoxGL = () => {
           <Popup
             ref={popRef}
             anchor="bottom"
-            latitude={getLatLongNum(selectedJob.CompanyLocation)[0]}
-            longitude={getLatLongNum(selectedJob.CompanyLocation)[1]}
+            latitude={selectedJob.latitude}
+            longitude={selectedJob.longitude}
             onClose={() => setSelectedJob(null)}
             closeOnClick={false}
             closeButton={false}
             offset={22}
             className=" bg-transparent"
             style={{ padding: 0 }}>
-            <div className=" bg-white space-y-2 p-3 h-[222px] overflow-scroll overflow-x-hidden rounded-lg">
-              {jobData.map((job, i) => (
+            <div
+              className={`customScroll bg-white space-y-2 p-2 h-fit max-h-[223px] ${
+                selectedJob.jobs.length > 3
+                  ? "overflow-scroll"
+                  : "overflow-hidden"
+              } overflow-x-hidden rounded-lg`}>
+              {selectedJob.jobs.map((job, i) => (
                 <div key={i}>
                   <Link href={"/job"}>
-                    <div className="border border-gray-400 p-2 rounded-md flex items-center gap-2">
+                    <div className="hover:bg-gray-100 active:bg-gray-300 border border-gray-300 p-2 rounded-lg flex items-center gap-2">
                       {/* logo container start */}
                       <div className="min-w-[44px] max-w-[44px] h-[44px] rounded-lg bg-black text-center flex items-center justify-center text-white translate-y-[1px]">
                         {/* Logo div */}

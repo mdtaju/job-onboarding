@@ -116,13 +116,15 @@ const MapModal = (props) => {
       )}
 
       {props.modal === true && (
-        <div className={`w-full overflow-hidden rounded-xl h-[600px] z-50`}>
+        <div className={`w-full overflow-hidden rounded-xl h-[450px] z-50`}>
           <div className="leaflet-container">
             <ReactMapGL
               {...viewPort}
               onMove={(e) => setViewPort(e.viewState)}
               mapStyle="mapbox://styles/mapbox/streets-v9"
+              // mapStyle="maptilersdk.MapStyle.STREETS"
               style={{ width: "100%", height: "100%" }}
+              // mapboxAccessToken={"mdgVsdtl9ApgJYjEJLIk"}
               mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
               ref={(instance) => (mapRef.current = instance)}>
               {jobData?.map((job, i) => {

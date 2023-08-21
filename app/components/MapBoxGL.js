@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import useSupercluster from "use-supercluster";
 
 const MapBoxGL = () => {
   const jobData = JobList;
@@ -17,6 +18,30 @@ const MapBoxGL = () => {
     zoom: 10,
   });
 
+  // get points for cluster
+  const points = jobData.map((job) => ({
+    ...job,
+    type: "Feature",
+    properties: { cluster: false, jobId: job.id, category: job.Category },
+    geometry: {
+      type: "Point",
+      coordinates: [parseFloat(job.longitude), parseFloat(job.latitude)],
+    },
+  }));
+
+  // get bonds for cluster
+  const bounds = mapRef.current
+    ? mapRef.current.getMap().getBounds().toArray().flat()
+    : null;
+
+  const { clusters, supercluster } = useSupercluster({
+    points,
+    bounds,
+    zoom: viewPort.zoom,
+    options: { radius: 75, maxZoom: 20 },
+  });
+
+  // popup close on random click
   useEffect(() => {
     const popElement = document.getElementsByClassName("marker_btn");
     document.addEventListener("click", function (event) {
@@ -35,8 +60,8 @@ const MapBoxGL = () => {
     });
   }, []);
 
+  // click to center the marker
   const markerCenterHandler = useCallback((latitude, longitude) => {
-    console.log(mapRef.current);
     mapRef.current?.easeTo({ center: [longitude, latitude], duration: 500 });
   }, []);
 
@@ -49,13 +74,53 @@ const MapBoxGL = () => {
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
         ref={(instance) => (mapRef.current = instance)}>
-        {jobData?.map((job, i) => {
+        {/* clusters marker */}
+        {clusters.map((cluster) => {
+          // every cluster point has coordinates
+          const [longitude, latitude] = cluster.geometry.coordinates;
+          // the point may be either a cluster or a job point
+          const { cluster: isCluster, point_count: pointCount } =
+            cluster.properties;
+
+          // we have a cluster to render
+          if (isCluster) {
+            return (
+              <Marker
+                key={`cluster-${cluster.id}`}
+                latitude={latitude}
+                longitude={longitude}
+                onClick={() => {
+                  const expansionZoom = Math.min(
+                    supercluster.getClusterExpansionZoom(cluster.id),
+                    20
+                  );
+                  mapRef.current?.easeTo({
+                    center: [longitude, latitude],
+                    zoom: expansionZoom,
+                    duration: 500,
+                  });
+                }}>
+                <div
+                  className="cluster-marker cursor-pointer"
+                  style={{
+                    width: `${30 + (pointCount / points.length) * 20}px`,
+                    height: `${30 + (pointCount / points.length) * 20}px`,
+                  }}>
+                  {pointCount}
+                </div>
+              </Marker>
+            );
+          }
+
+          // we have a single point (job) to render
           return (
             <Marker
-              key={i}
-              latitude={job.latitude}
-              longitude={job.longitude}
-              onClick={() => markerCenterHandler(job.latitude, job.longitude)}
+              key={`job-${cluster.properties.jobId}`}
+              latitude={cluster.latitude}
+              longitude={cluster.longitude}
+              onClick={() =>
+                markerCenterHandler(cluster.latitude, cluster.longitude)
+              }
               ref={markerRef}>
               {/* company location */}
               <button
@@ -64,7 +129,7 @@ const MapBoxGL = () => {
                 style={{
                   width: "42px",
                   height: "42px",
-                  backgroundColor: job.CategoryColour.toLowerCase(),
+                  backgroundColor: cluster.CategoryColour.toLowerCase(),
                   display: "grid",
                   placeItems: "center",
                   borderRadius: "50%",
@@ -73,12 +138,12 @@ const MapBoxGL = () => {
                 type="button"
                 onClick={(e) => {
                   e.preventDefault();
-                  setSelectedJob(job);
+                  setSelectedJob(cluster);
                 }}>
                 {/* job count badge */}
-                {job.jobs.length > 1 && (
+                {cluster.jobs.length > 1 && (
                   <div className="absolute top-[-10px] right-[-5px] rounded-full py-1 px-2 leading-none bg-white">
-                    {job.jobs.length > 9 ? "9+" : job.jobs.length}
+                    {cluster.jobs.length > 9 ? "9+" : cluster.jobs.length}
                   </div>
                 )}
                 {/* home icon svg */}

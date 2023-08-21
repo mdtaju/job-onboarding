@@ -86,3 +86,14 @@ body {
 .map_popup_scrollbar::-webkit-scrollbar-thumb {
   background: #cccbcb;
 }
+
+/* cluster marker */
+.cluster-marker {
+  color: #fff;
+  background: #1978c8;
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

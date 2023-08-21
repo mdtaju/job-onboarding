@@ -1,7 +1,7 @@
 const JobList = [
   {
     id: 1,
-    latitude: "51.9198816454355",
+    latitude: "51.8198816454355",
     longitude: "4.478242294834028",
     Category: "Store",
     CategoryColour: "Red",
@@ -292,7 +292,7 @@ const JobList = [
   },
   {
     id: 5,
-    latitude: "52.01235697475383",
+    latitude: "52.01235697475483",
     longitude: "4.359441657274189",
     Category: "Store",
     CategoryColour: "black",
@@ -439,7 +439,7 @@ const JobList = [
   },
   {
     id: 8,
-    latitude: "52.16080607328745",
+    latitude: "52.16080607428745",
     longitude: "4.489595864524291",
     Category: "Store",
     CategoryColour: "blue",
@@ -637,7 +637,7 @@ const JobList = [
   },
   {
     id: 10,
-    latitude: "51.9198816454355",
+    latitude: "51.9188816454955",
     longitude: "4.478242294834028",
     Category: "Store",
     CategoryColour: "Red",

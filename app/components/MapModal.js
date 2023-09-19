@@ -136,7 +136,7 @@ const MapModal = (props) => {
       )}
 
       {props.modal === true && (
-        <div className={`w-full overflow-hidden rounded-xl h-[500px] z-50`}>
+        <div className={`w-full overflow-hidden rounded-xl h-[450px] z-50`}>
           <div className="leaflet-container">
             <ReactMapGL
               {...viewPort}

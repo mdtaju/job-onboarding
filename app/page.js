@@ -9,7 +9,8 @@ import dynamic from "next/dynamic";
 import JobList from "../src/utilities/db";
 import ControlMenu from "./components/ControlMenu";
 
-import "mapbox-gl/dist/mapbox-gl.css";
+// import "mapbox-gl/dist/mapbox-gl.css";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 const MapBoxGL = dynamic(() => import("./components/MapBoxGL"), {
   ssr: false,
@@ -36,7 +37,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="relative bg-[#F6F6F6]">
+      <div className="relative bg-[#F6F6F6] px-5 sm:px-0">
         <Categories />
         <CategoriesMobile />
         <div

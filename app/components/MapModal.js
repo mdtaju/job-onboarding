@@ -1,9 +1,9 @@
 "use client";
 import JobList from "@/src/utilities/jobs-example";
-import "leaflet/dist/leaflet.css";
+import maplibregl from "maplibre-gl";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import ReactMapGL, { Marker, Popup } from "react-map-gl/maplibre";
 import useSupercluster from "use-supercluster";
 
 const MapModal = (props) => {
@@ -136,15 +136,16 @@ const MapModal = (props) => {
       )}
 
       {props.modal === true && (
-        <div className={`w-full overflow-hidden rounded-xl h-[450px] z-50`}>
+        <div className={`w-full overflow-hidden rounded-xl h-[500px] z-50`}>
           <div className="leaflet-container">
             <ReactMapGL
               {...viewPort}
               onMove={(e) => setViewPort(e.viewState)}
               style={{ width: "100%", height: "100%" }}
-              mapStyle="mapbox://styles/mapbox/streets-v9"
-              mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-              ref={(instance) => (mapRef.current = instance)}>
+              cursor="grab"
+              mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_TOKEN}`}
+              ref={(instance) => (mapRef.current = instance)}
+              mapLib={maplibregl}>
               {/* clusters marker */}
               {clusters.map((cluster) => {
                 // every cluster point has coordinates
@@ -243,9 +244,7 @@ const MapModal = (props) => {
                   onClose={() => setSelectedJob(null)}
                   closeOnClick={false}
                   closeButton={false}
-                  offset={22}
-                  className=" bg-transparent"
-                  style={{ padding: 0 }}>
+                  offset={22}>
                   <div
                     className={`customScroll map_popup_scrollbar bg-white space-y-[6px] p-[6px] h-fit max-h-[186px] ${
                       selectedJob.jobs.length > 3

@@ -77,7 +77,8 @@ body {
 }
 
 /* mapbox */
-.mapboxgl-popup-content {
+.mapboxgl-popup-content,
+.maplibregl-popup-content {
   padding: 0 !important;
   border-radius: 7px !important;
 }

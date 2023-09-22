@@ -40,7 +40,9 @@ const JobCard = (props) => {
             <div className="w-full flex items-center gap-0 sm:gap-5 justify-between">
               <div className="w-full flex gap-3 justify-between sm:justify-normal">
                 <div className="text-[#2b323d] text-[17px] sm:text-[19px] font-[600]">
-                  {JobName}
+                  {JobName?.length > 42
+                    ? `${JobName?.slice(0, 42)} ...`
+                    : JobName}
                 </div>
                 <div className="">
                   <button

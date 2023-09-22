@@ -1,59 +1,115 @@
-import { useState, Fragment } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 
 const SearchButton = () => {
+  const [modal, setmodal] = useState(false);
+  const [showSuggestion, setshowSuggestion] = useState("false");
+  const [searchText, setSearchText] = useState("");
+  const [searchList, setSearchList] = useState([]);
 
-
-  const [modal, setmodal] = useState(false)
-  const [showSuggestion, setshowSuggestion] = useState('false');
+  const mainList = [
+    "Paris",
+    "Milan",
+    "Helsinki",
+    "Paris",
+    "Milan",
+    "HHai",
+    "Helsinki",
+  ];
 
   function closeModal() {
-      setmodal(false)
+    setmodal(false);
   }
+
+  const handleChange = (event) => {
+    const keyword = event.target.value.toLowerCase();
+    setSearchText(keyword);
+
+    const filetStrings = mainList.filter((sl) =>
+      sl.toLowerCase().includes(keyword)
+    );
+
+    // Sort the strings based on the keyword
+    const sortedStrings = filetStrings.sort((a, b) => {
+      // Custom comparison logic here
+      return a.toLowerCase().includes(keyword)
+        ? -1
+        : b.toLowerCase().includes(keyword)
+        ? 1
+        : 0;
+    });
+
+    if (sortedStrings.length) {
+      setSearchList(sortedStrings);
+      return;
+    } else {
+      setSearchList(["No Item Found"]);
+    }
+  };
+
+  const handleSearchResultClick = (value) => {
+    setSearchText(value);
+    setSearchList([]);
+  };
 
   return (
     <>
-            {/* input field starts */}
-         <div className="hidden sm:flex relative w-full">
-             <div className="customShadow flex items-center gap-3 rounded-lg bg-white border-2 border-gray-200 h-[45px] focus-within:border-blue-500 w-full transition hover:bg-[#f2f2f2] px-2">
-                  <img src="/images/search.svg" alt="Search" />
-                  <input type="text" onFocus={()=> {setshowSuggestion(true)}} onBlur={()=> {setshowSuggestion(false)}}  placeholder="Position, company, keyword" className="w-full h-full bg-transparent border-none outline-none" />
-             </div>
+      {/* input field starts */}
+      <div className="hidden sm:flex relative w-full">
+        <div className="customShadow flex items-center gap-3 rounded-lg bg-white border-2 border-gray-200 h-[45px] focus-within:border-blue-500 w-full transition hover:bg-[#f2f2f2] px-2">
+          <img src="/images/search.svg" alt="Search" />
+          <input
+            type="text"
+            onFocus={() => {
+              setshowSuggestion(true);
+            }}
+            // onBlur={() => {
+            //   setshowSuggestion(false);
+            // }}
+            onBlur={() => {
+              setTimeout(() => {
+                setshowSuggestion(false);
+                setSearchList([]);
+              }, 200);
+            }}
+            value={searchText}
+            onChange={handleChange}
+            placeholder="Position, company, keyword"
+            className="w-full h-full bg-transparent border-none outline-none"
+          />
+        </div>
 
-                {/* suggested locations when user is typing starts */}
+        {/* suggested locations when user is typing starts */}
 
-                {
-                    showSuggestion === true ?
-                    <div className="customScroll absolute top-[calc(100%+3px)] left-0 w-full p-1 flex flex-col space-y-1 bg-white border-2 border-gray-200 rounded-lg max-h-[130px] overflow-y-auto z-20">
-                     <button className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Paris</button>
-                     <button className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Milan</button>
-                     <button className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Helsinki</button>
-                     <button className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Paris</button>
-                     <button className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Milan</button>
-                     <button className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Helsinki</button>
-                    </div>
-                    :
-                    null
-                 }
+        {showSuggestion === true && searchText.length ? (
+          <div className="customScroll absolute top-[calc(100%+3px)] left-0 w-full p-1 flex flex-col space-y-1 bg-white border-2 border-gray-200 rounded-lg max-h-[130px] overflow-y-auto z-20">
+            {searchList.map((item, i) => (
+              <button
+                onClick={() => handleSearchResultClick(item)}
+                key={i}
+                className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">
+                {item}
+              </button>
+            ))}
+          </div>
+        ) : null}
 
-                {/* suggested locations when user is typing ends */}
-            </div>
-             {/* input field ends */}
+        {/* suggested locations when user is typing ends */}
+      </div>
+      {/* input field ends */}
 
+      {/* mobile search button */}
+      <button
+        onClick={() => {
+          setmodal(true);
+        }}
+        className="customShadow flex sm:hidden items-center gap-3 rounded-lg bg-white border-2 border-gray-200 overflow-hidden h-[45px] transition hover:bg-[#f2f2f2] px-3">
+        <img src="/images/search.svg" alt="Search" />
+      </button>
+      {/* mobile search button */}
 
-
-
-
-
-             {/* mobile search button */}
-    <button onClick={()=> {setmodal(true)}} className="customShadow flex sm:hidden items-center gap-3 rounded-lg bg-white border-2 border-gray-200 overflow-hidden h-[45px] transition hover:bg-[#f2f2f2] px-3">
-     <img src="/images/search.svg" alt="Search" />
-    </button>
-             {/* mobile search button */}
-             
-
-             {/* search modal */}
-    <Transition appear show={modal} as={Fragment}>
+      {/* search modal */}
+      <Transition appear show={modal} as={Fragment}>
         <Dialog as="div" className="relative z-50" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
@@ -62,8 +118,7 @@ const SearchButton = () => {
             enterTo="opacity-100"
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
+            leaveTo="opacity-0">
             <div className="fixed inset-0 bg-[#6B7280] bg-opacity-75" />
           </Transition.Child>
 
@@ -76,41 +131,50 @@ const SearchButton = () => {
                 enterTo="opacity-100 scale-100"
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
+                leaveTo="opacity-0 scale-95">
                 <Dialog.Panel className="w-full transform overflow-hidden rounded-xl bg-white p-4 text-center align-middle transition-all">
-                  
-            {/* mobile input field starts */}
-                  
-                   <div className="relative w-full">
+                  {/* mobile input field starts */}
+
+                  <div className="relative w-full">
                     <div className="customShadow flex items-center gap-3 rounded-lg bg-white border-2 border-gray-200 overflow-hidden h-[45px] focus-within:border-blue-500 hover:border-blue-500 w-full px-2">
-                     <img src="/images/search.svg" alt="Search" />
-                     <input type="text" placeholder="Position, company, keyword" onFocus={()=> {setshowSuggestion(true)}} onBlur={()=> {setTimeout(() => {setshowSuggestion(false)}, 200);}} className="w-full h-full bg-transparent border-none outline-none" />
+                      <img src="/images/search.svg" alt="Search" />
+                      <input
+                        type="text"
+                        placeholder="Position, company, keyword"
+                        onFocus={() => {
+                          setshowSuggestion(true);
+                        }}
+                        onBlur={() => {
+                          setTimeout(() => {
+                            setshowSuggestion(false);
+                            setSearchList([]);
+                          }, 200);
+                        }}
+                        value={searchText}
+                        onChange={handleChange}
+                        className="w-full h-full bg-transparent border-none outline-none"
+                      />
                     </div>
 
+                    {/* suggested locations when user is typing starts */}
 
-                {/* suggested locations when user is typing starts */}
+                    {showSuggestion === true && searchText.length ? (
+                      <div className="customScroll w-full p-1 flex flex-col space-y-1 bg-white border-2 border-gray-200 rounded-lg max-h-[130px] mt-1 overflow-y-auto z-20">
+                        {searchList.map((item, i) => (
+                          <button
+                            onClick={() => handleSearchResultClick(item)}
+                            key={i}
+                            className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">
+                            {item}
+                          </button>
+                        ))}
+                      </div>
+                    ) : null}
 
-                {
-                    showSuggestion === true ?
-                    <div className="customScroll w-full p-1 flex flex-col space-y-1 bg-white border-2 border-gray-200 rounded-lg max-h-[130px] mt-1 overflow-y-auto z-20">
-                     <button onClick={closeModal} className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Paris</button>
-                     <button onClick={closeModal} className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Milan</button>
-                     <button onClick={closeModal} className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Helsinki</button>
-                     <button onClick={closeModal} className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Paris</button>
-                     <button onClick={closeModal} className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Milan</button>
-                     <button onClick={closeModal} className="w-full py-1.5 px-2 text-left rounded-md hover:bg-[#F3F4F6] font-medium text-[#374151]">Helsinki</button>
-                    </div>
-                    :
-                    null
-                 }
+                    {/* suggested locations when user is typing ends */}
+                  </div>
 
-                {/* suggested locations when user is typing ends */}
-
-                   </div>
-
-            {/* mobile input field ends */}
-               
+                  {/* mobile input field ends */}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -118,7 +182,7 @@ const SearchButton = () => {
         </Dialog>
       </Transition>
     </>
-  )
-}
+  );
+};
 
-export default SearchButton
+export default SearchButton;

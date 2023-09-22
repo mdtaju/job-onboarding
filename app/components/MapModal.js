@@ -49,8 +49,14 @@ const MapModal = (props) => {
   useEffect(() => {
     function handleScroll() {
       const currentScrollPos = window.scrollY;
-      setShowButton(currentScrollPos < scrollPos);
+      // setShowButton(currentScrollPos > scrollPos);
+      if (currentScrollPos < 400) {
+        setShowButton(false);
+      } else {
+        setShowButton(true);
+      }
       setScrollPos(currentScrollPos);
+      console.log("first");
     }
 
     window.addEventListener("scroll", handleScroll);
@@ -96,7 +102,7 @@ const MapModal = (props) => {
           onClick={() => {
             props.setModal(true);
           }}
-          className={`shadow-lg fixed bottom-5 left-1/2 -translate-x-1/2 items-center justify-center gap-2 bg-black whitespace-nowrap text-white w-[100px] h-[50px] rounded-full text-[15px] transition z-30 ${
+          className={`shadow-lg fixed bottom-5 left-1/2 -translate-x-1/2 items-center justify-center gap-2 bg-black whitespace-nowrap text-white w-[100px] h-[40px] rounded-full text-[15px] transition z-30 ${
             props.modal === false ? "flex lg4:hidden" : "hidden"
           } ${showButton === true ? "" : "translate-y-[calc(100%+20px)]"}`}>
           {/* <svg
@@ -129,21 +135,22 @@ const MapModal = (props) => {
         /* Show Listing button starts */
         <button
           onClick={closeModal}
-          className={`shadow-lg fixed bottom-5 left-1/2 -translate-x-1/2 items-center justify-center gap-2 bg-black whitespace-nowrap text-white w-[100px] h-[50px] rounded-full text-[15px] transition z-30 ${
+          className={`shadow-lg fixed bottom-5 left-1/2 -translate-x-1/2 items-center justify-center gap-2 bg-black whitespace-nowrap text-white w-[100px] h-[40px] rounded-full text-[15px] transition z-30 ${
             props.modal === true ? "flex lg4:hidden" : "hidden"
-          } ${showButton === true ? "" : "translate-y-[calc(100%+20px)]"}`}>
+          }`}>
           List
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="currentColor"
-            viewBox="0 0 16 16">
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6">
             <path
-              fillRule="evenodd"
-              d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
             />
-            <path d="M2.242 2.194a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.256-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53z" />
           </svg>
         </button>
       )}

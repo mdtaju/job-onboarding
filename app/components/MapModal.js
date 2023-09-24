@@ -56,7 +56,6 @@ const MapModal = (props) => {
         setShowButton(true);
       }
       setScrollPos(currentScrollPos);
-      console.log("first");
     }
 
     window.addEventListener("scroll", handleScroll);

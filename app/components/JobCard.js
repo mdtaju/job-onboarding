@@ -11,6 +11,7 @@ const JobCard = (props) => {
     JobLocation,
     ContractType,
     English,
+    Hybrid: isHybrid,
     Remote: IsJobRemote,
     Tag1,
     Tag2,
@@ -141,6 +142,12 @@ const JobCard = (props) => {
                 <img src="/images/flag.svg" alt="flag" className="w-[20px]" />
               )}
 
+              {isHybrid === 1 && (
+                <div className="flex items-center gap-2 rounded-full bg-[#F3DBFE] text-[#BA3BF6] text-[13px] font-semibold text-center px-3 h-[30px]">
+                  <div className="rounded-full bg-[#BA3BF6] w-1.5 h-1.5"></div>{" "}
+                  Hybrid
+                </div>
+              )}
               {IsJobRemote === 1 && (
                 <div className="flex items-center gap-2 rounded-full bg-[#3B82F6] bg-opacity-10 text-[#3B82F6] text-[13px] font-semibold text-center px-3 h-[30px]">
                   <div className="rounded-full bg-[#3B82F6] w-1.5 h-1.5"></div>{" "}

@@ -62,7 +62,9 @@ const ControlMenu = (props) => {
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-3">
             <button
-              onClick={() => setResetFilter("TRUE")}
+              onClick={() =>
+                setResetFilter(Math.floor(Math.random() * 90000) + 10000)
+              }
               className="w-full sm:w-fit px-3 py-1 flex items-center gap-1 mx-auto text-base bg-white border-2 border-gray-200 h-[40px] rounded-md shadow-sm font-semibold text-gray-800">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

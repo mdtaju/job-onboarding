@@ -1,12 +1,22 @@
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
-const LocationButton = () => {
+const LocationButton = ({ resetFilter, setResetFilter }) => {
   const [locationNotApplied, setlocationNotApplied] = useState("none");
   const [locationApplied, setlocationApplied] = useState("");
   const [showSuggestion, setshowSuggestion] = useState("false");
   const [searchText, setSearchText] = useState("");
   const [searchList, setSearchList] = useState([]);
+
+  useEffect(() => {
+    if (resetFilter) {
+      setlocationNotApplied("none");
+      setlocationApplied("");
+      setshowSuggestion("false");
+      setSearchText("");
+      setSearchList([]);
+    }
+  }, [resetFilter]);
 
   const mainList = [
     "Paris",
@@ -228,6 +238,7 @@ const LocationButton = () => {
                       onClick={() => {
                         if (locationNotApplied !== "none") {
                           setlocationApplied(locationNotApplied);
+                          setResetFilter(false);
                         }
                       }}
                       className="flex items-center gap-3 rounded-xl text-white bg-[#6B7280] font-medium border-2 border-gray-200 w-fit transition hover:bg-[#585858] px-3 py-2">

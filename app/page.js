@@ -11,6 +11,7 @@ import ControlMenu from "./components/ControlMenu";
 
 // import "mapbox-gl/dist/mapbox-gl.css";
 import "maplibre-gl/dist/maplibre-gl.css";
+import NoResult from "./components/NoResult";
 
 const MapBoxGL = dynamic(() => import("./components/MapBoxGL"), {
   ssr: false,
@@ -25,9 +26,10 @@ const MapModal = dynamic(() => import("./components/MapModal"), {
 export default function Home() {
   const [modal, setModal] = useState(false);
   const [loading, setloading] = useState(true);
+  const [resetFilter, setResetFilter] = useState(true);
+  const [jobData, setJobData] = useState(JobList || []);
 
   // static data
-  const jobData = JobList;
 
   useEffect(() => {
     setTimeout(() => {
@@ -35,11 +37,17 @@ export default function Home() {
     }, 1000);
   }, []);
 
+  // reset filter
+  useEffect(() => {
+    if (resetFilter) setJobData(JobList);
+    if (!resetFilter) setJobData([]);
+  }, [resetFilter]);
+
   return (
     <>
       <div className="relative bg-[#F6F6F6] px-5 sm:px-0">
-        <Categories />
-        <CategoriesMobile />
+        <Categories resetFilter={resetFilter} />
+        <CategoriesMobile resetFilter={resetFilter} />
         <div
           className={`grid grid-cols-1 lg4:grid-cols-[1fr,1fr] lg6:grid-cols-[1fr,500px] lg8:grid-cols-[1fr,560px] gap-5 bg-transparent ${
             modal === false ? "mb-5" : "mb-2"
@@ -47,20 +55,30 @@ export default function Home() {
           {/*left section starts */}
           <div>
             {/* the search sticky section starts */}
-            <ControlMenu modal={modal} />
+            <ControlMenu
+              modal={modal}
+              setResetFilter={setResetFilter}
+              resetFilter={resetFilter}
+            />
             {/* the search sticky section ends */}
 
             {modal === false ? (
               <>
                 <div className="flex flex-col gap-3">
-                  {jobData?.map((job, i) => (
-                    <JobCard
-                      key={i}
-                      loading={loading}
-                      homeView={true}
-                      job={job}
-                    />
-                  ))}
+                  {jobData?.length ? (
+                    <>
+                      {jobData?.map((job, i) => (
+                        <JobCard
+                          key={i}
+                          loading={loading}
+                          homeView={true}
+                          job={job}
+                        />
+                      ))}
+                    </>
+                  ) : (
+                    <NoResult setResetFilter={setResetFilter} />
+                  )}
                 </div>
 
                 <div className="grid gird-cols-1 sm:grid-cols-2 gap-3 mt-3">

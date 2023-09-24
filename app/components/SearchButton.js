@@ -1,11 +1,15 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
-const SearchButton = () => {
+const SearchButton = ({ resetFilter }) => {
   const [modal, setmodal] = useState(false);
   const [showSuggestion, setshowSuggestion] = useState("false");
   const [searchText, setSearchText] = useState("");
   const [searchList, setSearchList] = useState([]);
+
+  useEffect(() => {
+    if (resetFilter) setSearchText("");
+  }, [resetFilter]);
 
   const mainList = [
     "Paris",

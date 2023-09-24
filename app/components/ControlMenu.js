@@ -60,7 +60,7 @@ const ControlMenu = (props) => {
           <div className="text-[#374151] font-medium whitespace-nowrap">
             Job Listings: 24 192 offers
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <button
               onClick={() => setResetFilter("TRUE")}
               className="px-3 py-1 flex items-center gap-1 mx-auto text-base bg-white border-2 border-gray-200 h-[40px] rounded-md shadow-sm font-semibold text-gray-800">

@@ -60,8 +60,28 @@ const ControlMenu = (props) => {
           <div className="text-[#374151] font-medium whitespace-nowrap">
             Job Listings: 24 192 offers
           </div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setResetFilter("TRUE")}
+              className="px-3 py-1 flex items-center gap-1 mx-auto text-base bg-white border-2 border-gray-200 h-[40px] rounded-md shadow-sm font-semibold text-gray-800">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              Clear filters
+            </button>
 
-          <SortButton />
+            <SortButton />
+          </div>
         </div>
         <div className="absolute -top-4 left-0 bg-[#F6F6F6] w-full h-4"></div>
       </div>

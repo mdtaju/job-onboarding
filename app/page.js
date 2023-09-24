@@ -26,7 +26,7 @@ const MapModal = dynamic(() => import("./components/MapModal"), {
 export default function Home() {
   const [modal, setModal] = useState(false);
   const [loading, setloading] = useState(true);
-  const [resetFilter, setResetFilter] = useState(true);
+  const [resetFilter, setResetFilter] = useState("true");
   const [jobData, setJobData] = useState(JobList || []);
 
   // static data

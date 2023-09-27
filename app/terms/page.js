@@ -69,7 +69,7 @@ function Terms() {
           <h1>Apply for this job</h1>
         </div>
         {/* body */}
-        <div className="px-4 py-6 text-sm font-semibold text-gray-600 leading-6 bg-white">
+        <div className="px-4 py-6 text-sm font-semibold text-gray-600 leading-6 bg-white rounded-b-lg">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga vero
             accusantium temporibus alias eos ut exercitationem eum blanditiis

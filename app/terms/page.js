@@ -1,7 +1,7 @@
 "use client";
 function Terms() {
   return (
-    <div className="py-4">
+    <div className="py-4 px-4 sm:px-0">
       <div className="border-2 border-gray-300 rounded-lg">
         {/* title */}
         <div className="p-4 rounded-t-lg bg-gray-200 text-lg font-bold text-gray-800">

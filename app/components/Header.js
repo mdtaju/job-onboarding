@@ -72,6 +72,16 @@ const Header = () => {
           </span>
         </Link>
         <Link
+          href="/terms"
+          className="sm:hidden transition text-not-black hover:text-blue-500">
+          <span
+            onClick={() => {
+              setmenu(false);
+            }}>
+            Terms
+          </span>
+        </Link>
+        <Link
           href="/"
           className="sm:hidden px-3 py-2 rounded-md text-white bg-blue-500 transition w-fit hover:bg-blue-600">
           <span
@@ -85,13 +95,13 @@ const Header = () => {
 
         {/* links for tab and desktop view start */}
         <Link
-          href="/"
+          href="/terms"
           className="hidden sm:block transition text-not-black hover:text-blue-500">
           <span
             onClick={() => {
               setmenu(false);
             }}>
-            Real Estate
+            Terms
           </span>
         </Link>
         <Link

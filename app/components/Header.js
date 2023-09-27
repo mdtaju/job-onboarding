@@ -22,7 +22,7 @@ const Header = () => {
               Offers
             </Link>
             <Link
-              href="/"
+              href="/companies"
               className="transition text-not-black hover:text-blue-500 hidden sm:flex">
               Companies
             </Link>
@@ -62,7 +62,7 @@ const Header = () => {
           </span>
         </Link>
         <Link
-          href="/"
+          href="/companies"
           className="sm:hidden transition text-not-black hover:text-blue-500">
           <span
             onClick={() => {

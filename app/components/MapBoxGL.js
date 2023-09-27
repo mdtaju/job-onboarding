@@ -73,7 +73,7 @@ const MapBoxGL = () => {
         onMove={(e) => setViewPort(e.viewState)}
         style={{ width: "100%", height: "100%" }}
         cursor="grab"
-        mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_TOKEN}`}
+        mapStyle={`https://api.maptiler.com/maps/basic/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_TOKEN}`}
         ref={(instance) => (mapRef.current = instance)}
         mapLib={maplibregl}>
         {/* clusters marker */}

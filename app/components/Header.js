@@ -9,9 +9,9 @@ const Header = () => {
     <>
       <div className="customShadow bg-white">
         <div className="w-full max-w-[1500px] mx-auto px-5 relative flex items-center justify-between gap-3 py-4 bg-white z-50">
-          <div>
+          <div className="h-[32px] px-0 sm:px-1">
             <Link href="/">
-              <img src="/images/logo.svg" alt="logo" />
+              <img src="/logo.svg" alt="logo" className="h-full" />
             </Link>
           </div>
 

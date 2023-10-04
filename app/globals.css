@@ -89,12 +89,51 @@ body {
 }
 
 /* cluster marker */
+.cluster_marker_outer {
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+}
+
+.cluster_marker_outer:hover {
+  width: 100px;
+  height: 100px;
+}
+
+.cluster_marker_inner {
+  width: 71px;
+  height: 71px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  transition: all ease-in-out 0.2s;
+}
+
+.cluster_marker_outer:hover .cluster_marker_inner {
+  width: 91px;
+  height: 91px;
+}
+
+.cluster_marker_outer:active .cluster_marker_inner {
+  background: rgba(125, 125, 125, 0.7);
+}
+
 .cluster-marker {
-  color: #fff;
-  background: #1978c8;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all ease-in-out 0.2s;
+}
+
+.cluster_marker_outer:hover .cluster-marker {
+  width: 56px;
+  height: 56px;
 }

@@ -8,9 +8,7 @@ const Footer = () => {
           <Link href="/">
             <img src="/logo.svg" alt="logo" className="h-[32px]" />
           </Link>
-          <div className="text-not-black mb-2.5 mt-3">
-            © 2022 logo_palceholder
-          </div>
+          <div className="text-not-black mb-2.5 mt-3">© 2022 Job Sparkle</div>
           <div>Some information if needed cause this is important</div>
         </div>
       </div>

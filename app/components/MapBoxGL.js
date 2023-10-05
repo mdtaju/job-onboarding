@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import maplibregl from "maplibre-gl";
 import { useCallback, useEffect, useRef, useState } from "react";
-import ReactMapGL, { Popup } from "react-map-gl/maplibre";
+import ReactMapGL, { GeolocateControl, Popup } from "react-map-gl/maplibre";
 import useSupercluster from "use-supercluster";
 import MapClusterMarker from "./MapClusterMarker";
 import MapMarker from "./MapMarker";
@@ -13,6 +13,7 @@ const MapBoxGL = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const mapRef = useRef(null);
   const popRef = useRef(null);
+  const geoControlRef = useRef(null);
   const [viewPort, setViewPort] = useState({
     latitude: 51.9198816454355,
     longitude: 4.478242294834028,
@@ -82,8 +83,32 @@ const MapBoxGL = () => {
     }, 200);
   };
 
+  function geoLocateEvent(e) {
+    const { latitude, longitude } = e.coords;
+    console.log(e);
+
+    mapRef.current?.easeTo({
+      center: [longitude, latitude],
+      zoom: 10,
+      duration: 500,
+    });
+  }
+
   return (
     <div className="relative bg-white flex items-center justify-center w-full overflow-hidden rounded-xl h-[400px] lg4:h-[500px]">
+      {/* <button className="absolute top-[10px] right-[10px] w-[30px] h-[30px] bg-white rounded-lg z-[2] border-2 border-gray-200 shadow-sm grid place-items-center hover:bg-gray-400">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M13.7175 0.28196C13.789 0.353495 13.8371 0.445024 13.8555 0.544467C13.8739 0.643911 13.8617 0.746592 13.8205 0.83896L8.16355 13.567C8.12402 13.656 8.05936 13.7315 7.9775 13.7843C7.89564 13.8371 7.80015 13.8648 7.70275 13.864C7.60536 13.8633 7.5103 13.8341 7.42926 13.7801C7.34821 13.7261 7.28471 13.6496 7.24655 13.56L5.20555 8.79396L0.438546 6.75196C0.349271 6.71356 0.273121 6.64998 0.21941 6.56898C0.165699 6.48799 0.136756 6.3931 0.136119 6.29592C0.135483 6.19874 0.163181 6.10348 0.215826 6.02179C0.268471 5.9401 0.343781 5.87553 0.432546 5.83596L13.1605 0.17896C13.2528 0.138008 13.3553 0.125929 13.4545 0.144313C13.5537 0.162697 13.6461 0.210682 13.7175 0.28196ZM1.88555 6.28396L5.78255 7.95396C5.90039 8.00476 5.9942 8.09892 6.04455 8.21696L7.71455 12.114L12.3785 1.61996L1.88555 6.28396Z"
+            fill="#575757"
+          />
+        </svg>
+      </button> */}
       <ReactMapGL
         {...viewPort}
         onMove={(e) => setViewPort(e.viewState)}
@@ -93,7 +118,17 @@ const MapBoxGL = () => {
         ref={(instance) => (mapRef.current = instance)}
         mapLib={maplibregl}>
         {/* clusters marker */}
-        {clusters.map((cluster) => {
+        <GeolocateControl
+          ref={geoControlRef}
+          onGeolocate={geoLocateEvent}
+          // showUserLocation={true}
+          trackUserLocation={true}
+          // showAccuracyCircle={true}
+          // style={{ opacity: 0 }}
+          positionOptions={{ enableHighAccuracy: true }}
+          auto
+        />
+        {clusters.map((cluster, i) => {
           // the point may be either a cluster or a job point
           const { cluster: isCluster } = cluster.properties;
 
@@ -101,6 +136,7 @@ const MapBoxGL = () => {
           if (isCluster) {
             return (
               <MapClusterMarker
+                key={i}
                 cluster={cluster}
                 clusterHandler={clusterHandler}
               />
@@ -110,9 +146,11 @@ const MapBoxGL = () => {
           // we have a single point (job) to render
           return (
             <MapMarker
+              key={i}
               cluster={cluster}
               markerCenterHandler={markerCenterHandler}
               setSelectedJob={setSelectedJob}
+              bounce={false}
             />
           );
         })}

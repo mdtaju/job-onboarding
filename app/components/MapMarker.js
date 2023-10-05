@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Marker } from "react-map-gl/maplibre";
 
-function MapMarker({ cluster, markerCenterHandler, setSelectedJob }) {
+function MapMarker({ cluster, markerCenterHandler, setSelectedJob, bounce }) {
   const [isHover, setIsHover] = useState("not_hover");
   const [markerOuterColor, setMarkerOuterColor] = useState(
     cluster.CategoryOuterColor
@@ -40,7 +40,7 @@ function MapMarker({ cluster, markerCenterHandler, setSelectedJob }) {
         {/* company location */}
         <button
           ref={markerBtnRef}
-          className="marker_btn"
+          className={`marker_btn ${bounce ? "animate-bounce" : ""}`}
           style={{
             width: "65px",
             height: "65px",

@@ -48,7 +48,7 @@ export default function Job() {
                 <ShareButton />
               </div>
 
-              <div className="mt-5">
+              <div className="mt-2">
                 <JobInfoCard loading={loading} />
               </div>
             </div>

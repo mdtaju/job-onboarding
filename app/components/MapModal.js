@@ -174,7 +174,8 @@ const MapModal = (props) => {
 
       {props.modal === true && (
         <div className={`w-full overflow-hidden rounded-xl h-[450px] z-50`}>
-          <div className="leaflet-container">
+          <div className="leaflet-container relative">
+            <button className="absolute top-2 right-2 w-[40px] h-[40px] bg-white rounded-lg z-[50000]"></button>
             <ReactMapGL
               {...viewPort}
               onMove={(e) => setViewPort(e.viewState)}
@@ -184,7 +185,7 @@ const MapModal = (props) => {
               ref={(instance) => (mapRef.current = instance)}
               mapLib={maplibregl}>
               {/* clusters marker */}
-              {clusters.map((cluster) => {
+              {clusters.map((cluster, i) => {
                 // the point may be either a cluster or a job point
                 const { cluster: isCluster } = cluster.properties;
 
@@ -192,6 +193,7 @@ const MapModal = (props) => {
                 if (isCluster) {
                   return (
                     <MapClusterMarker
+                      key={i}
                       cluster={cluster}
                       clusterHandler={clusterHandler}
                     />
@@ -201,9 +203,11 @@ const MapModal = (props) => {
                 // we have a single point (job) to render
                 return (
                   <MapMarker
+                    key={i}
                     cluster={cluster}
                     markerCenterHandler={markerCenterHandler}
                     setSelectedJob={setSelectedJob}
+                    bounce={false}
                   />
                 );
               })}

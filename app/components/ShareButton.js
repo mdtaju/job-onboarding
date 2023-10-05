@@ -101,6 +101,29 @@ const ShareButton = () => {
                   <span>YouTube</span>
                 </button>
               </Menu.Item>
+              <div className="w-full h-[1px] rounded-full bg-gray-300"></div>
+              <Menu.Item>
+                <button
+                  onClick={() =>
+                    navigator.clipboard.writeText(window.location.href)
+                  }
+                  className={`w-full py-1.5 px-2 text-left rounded-md bg-white transition hover:bg-[#F3F4F6] font-medium text-[#374151] flex items-center gap-2 `}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-[16px] h-[16px]">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                    />
+                  </svg>
+                  <span>Copy Job Link</span>
+                </button>
+              </Menu.Item>
             </div>
           </Menu.Items>
         </Transition>

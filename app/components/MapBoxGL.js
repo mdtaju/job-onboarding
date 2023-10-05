@@ -123,10 +123,9 @@ const MapBoxGL = () => {
           onGeolocate={geoLocateEvent}
           // showUserLocation={true}
           trackUserLocation={true}
-          // showAccuracyCircle={true}
+          showAccuracyCircle={true}
           // style={{ opacity: 0 }}
           positionOptions={{ enableHighAccuracy: true }}
-          auto
         />
         {clusters.map((cluster, i) => {
           // the point may be either a cluster or a job point

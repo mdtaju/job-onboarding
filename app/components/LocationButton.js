@@ -148,8 +148,25 @@ const LocationButton = ({ resetFilter, setResetFilter }) => {
                 <div className="relative flex items-center gap-2 rounded-lg border-2 border-gray-200 focus-within:border-blue-500 overflow-visible transition hover:bg-[#f2f2f2] py-2 px-2">
                   <img src="/images/search.svg" alt="Search" />
                   {locationNotApplied !== "none" ? (
-                    <div className="cursor-pointer px-2 py-1 text-[13px] rounded-full bg-black text-white border-2 border-gray-200">
+                    <div className="px-2 py-1 text-[13px] rounded-full bg-black text-white border-2 border-gray-200 flex items-center gap-1">
                       {locationNotApplied}
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => setlocationNotApplied("none")}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#fff"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-[16px] h-[16px]">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </span>
                     </div>
                   ) : (
                     <input

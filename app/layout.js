@@ -25,7 +25,6 @@ export default function RootLayout({ children }) {
           {/* cookies modal for all pages */}
           <Cookies />
         </div>
-
         <Header />
         <div className="w-full max-w-[1500px] mx-auto px-0 sm:px-5">
           <div className="min-h-[calc(100vh-250px)]">{children}</div>

@@ -26,11 +26,16 @@ const Header = () => {
               className="transition text-not-black hover:text-blue-500 hidden sm:flex">
               Companies
             </Link>
-            <Link
-              href="/"
-              className="px-3 py-2 rounded-md text-white bg-blue-500 transition hover:bg-blue-600 hidden sm:flex">
-              Post a job
-            </Link>
+            <div className="relative hidden sm:flex">
+              <span className="px-2 py-1 bg-red-500 text-white rounded-full absolute top-[-14px] right-[-15px] text-xs font-semibold">
+                Free!
+              </span>
+              <Link
+                href="/"
+                className="px-3 py-2 rounded-md text-white bg-blue-500 transition hover:bg-blue-600 ">
+                Post a job
+              </Link>
+            </div>
             {/* <button className="hidden sm:flex px-3 py-3 rounded-md border-[1.5px] border-gray-200 transition hover:bg-[#f2f2f2]">
               <img src="/images/burger.svg" alt="burger menu" />
             </button> */}
@@ -81,16 +86,16 @@ const Header = () => {
             Terms
           </span>
         </Link>
-        <Link
-          href="/"
-          className="sm:hidden px-3 py-2 rounded-md text-white bg-blue-500 transition w-fit hover:bg-blue-600">
-          <span
-            onClick={() => {
-              setmenu(false);
-            }}>
-            Post a job
+        <div className="relative w-fit sm:hidden">
+          <span className="px-2 py-1 bg-red-500 text-white rounded-full absolute top-[-22px] right-[-15px] text-xs font-semibold">
+            Free!
           </span>
-        </Link>
+          <Link
+            href="/"
+            className="w-fit px-3 py-2 rounded-md text-white bg-blue-500 transition hover:bg-blue-600 ">
+            Post a job
+          </Link>
+        </div>
         {/* links for mobile view end */}
 
         {/* links for tab and desktop view start */}
@@ -144,6 +149,16 @@ const Header = () => {
             Marketing
           </span>
         </Link>
+        <div className="relative w-fit hidden sm:flex">
+          <span className="px-2 py-1 bg-red-500 text-white rounded-full absolute top-[-14px] right-[-15px] text-xs font-semibold">
+            Free!
+          </span>
+          <Link
+            href="/"
+            className="w-fit px-3 py-2 rounded-md text-white bg-blue-500 transition hover:bg-blue-600 ">
+            Post a job
+          </Link>
+        </div>
         {/* links for tab and desktop view end */}
       </div>
 

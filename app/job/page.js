@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ApplyForm from "../components/ApplyForm";
 import JobCard from "../components/JobCard";
 
+import JobList from "@/src/utilities/db";
 import { Dialog, Transition } from "@headlessui/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -24,6 +25,7 @@ export default function Job() {
   const [linkHash, setLinkHash] = useState("");
   const [loading, setloading] = useState(true);
   const [modal, setmodal] = useState(false);
+  const [jobData, setJobData] = useState(JobList || []);
 
   function closeModal() {
     setmodal(false);
@@ -133,9 +135,9 @@ export default function Job() {
                   <div>Go back</div>
                 </button>
 
-                <div className="flex items-center gap-2">
+                <div className=" flex items-center gap-2">
                   <Link href={"/companies/specific_company_page_about"}>
-                    <div className="flex items-center gap-1.5 rounded-lg bg-white text-[#7a8497] border-2 border-gray-200 overflow-hidden py-1.5 px-3 cursor-pointer hover:bg-[#f2f2f2]">
+                    <div className="customShadow flex items-center gap-1.5 rounded-lg bg-white text-[#7a8497] border-2 border-gray-200 overflow-hidden py-1.5 px-3 cursor-pointer hover:bg-[#f2f2f2]">
                       <svg
                         width="12"
                         height="12"
@@ -275,15 +277,25 @@ export default function Job() {
               <div className="w-full bg-gray-200 h-[1px] my-3"></div>
 
               <div className="flex flex-col gap-3">
-                <JobCard loading={loading} homeView={false} />
-                <JobCard loading={loading} homeView={false} />
-                <JobCard loading={loading} homeView={false} />
+                <>
+                  {jobData?.slice(4, 7)?.map((job, i) => (
+                    <JobCard
+                      key={i}
+                      loading={loading}
+                      homeView={false}
+                      job={job}
+                    />
+                  ))}
+                </>
               </div>
             </div>
           </div>
           {/*left section ends */}
         </div>
       </div>
+
+      {/* Footer
+      <Footer /> */}
     </>
   );
 }

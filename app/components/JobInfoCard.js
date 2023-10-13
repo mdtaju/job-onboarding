@@ -95,7 +95,11 @@ const JobInfoCard = (props) => {
                 <div className="font-semibold text-[13px]">Contract Time</div>
               </div>
 
-              <img src="/images/flag.svg" alt="flag" className="w-[20px]" />
+              <img
+                src="/images/flag.svg"
+                alt="flag"
+                className="w-[20px] rounded-full"
+              />
 
               <div className="flex items-center gap-2 rounded-full bg-[#3B82F6] bg-opacity-10 text-[#3B82F6] text-[13px] font-semibold text-center px-3 h-[30px]">
                 <div className="rounded-full bg-[#3B82F6] w-1.5 h-1.5"></div>{" "}

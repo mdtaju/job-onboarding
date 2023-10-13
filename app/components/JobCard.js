@@ -139,7 +139,11 @@ const JobCard = (props) => {
               </div>
 
               {English === 1 && (
-                <img src="/images/flag.svg" alt="flag" className="w-[20px]" />
+                <img
+                  src="/images/flag.svg"
+                  alt="flag"
+                  className="w-[20px] rounded-full"
+                />
               )}
 
               {isHybrid === 1 && (

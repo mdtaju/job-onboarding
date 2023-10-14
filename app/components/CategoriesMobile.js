@@ -108,50 +108,52 @@ const CategoriesMobile = ({ resetFilter }) => {
         {/* modal buttons show when active ends */}
 
         {/* desktop categories start */}
+        {/* restaurant_bars_button */}
         <button
           onClick={() => {
-            if (categoryState === "Real Estate") {
+            if (categoryState === "Restaurants & Bars") {
               setcategoryState("none");
               setsubCategory("none");
             } else {
-              setcategoryState("Real Estate");
+              setcategoryState("Restaurants & Bars");
               setsubCategory("none");
             }
           }}
-          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2  hover:border-black bg-[#FF9900] ${
-            categoryState === "Real Estate"
+          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2  hover:border-black bg-[#FF9F47] ${
+            categoryState === "Restaurants & Bars"
               ? "border-black"
               : categoryState === "none"
               ? "border-[#F6F6F6]"
               : "opacity-30"
-          } ${categoryState === "HoReCa" ? "hidden" : ""}`}>
-          Real Estate{" "}
+          } ${categoryState === "Retail and Shops" ? "hidden" : ""}`}>
+          Restaurants & Bars{" "}
           <img
-            src="/images/hat.svg"
+            src="/images/categories/restaurant_bars_button.svg"
             alt="hat"
             className="min-w-[22px] max-w-[22px]"
           />
         </button>
+        {/* Hotels button */}
         <button
           onClick={() => {
-            if (categoryState === "Consulting") {
+            if (categoryState === "Hotels") {
               setcategoryState("none");
               setsubCategory("none");
             } else {
-              setcategoryState("Consulting");
+              setcategoryState("Hotels");
               setsubCategory("none");
             }
           }}
-          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#0094FF] ${
-            categoryState === "Consulting"
+          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#5F9FFF] ${
+            categoryState === "Hotels"
               ? "border-black"
               : categoryState === "none"
               ? "border-[#F6F6F6]"
               : "opacity-30"
-          } ${categoryState === "HoReCa" ? "hidden" : ""}`}>
-          Consulting{" "}
+          } ${categoryState === "Retail and Shops" ? "hidden" : ""}`}>
+          Hotels{" "}
           <img
-            src="/images/hat.svg"
+            src="/images/categories/hotels_button.svg"
             alt="hat"
             className="min-w-[22px] max-w-[22px]"
           />
@@ -164,7 +166,7 @@ const CategoriesMobile = ({ resetFilter }) => {
             setsubCategory("none");
           }}
           className={`customShadow px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 border-gray-200 hover:border-black bg-white ${
-            categoryState === "HoReCa" ? "flex" : "hidden"
+            categoryState === "Retail and Shops" ? "flex" : "hidden"
           }`}>
           <img
             src="/images/arrow-left.svg"
@@ -173,22 +175,23 @@ const CategoriesMobile = ({ resetFilter }) => {
           />
         </button>
 
+        {/* retails and shops */}
         <button
           onClick={() => {
-            setcategoryState("HoReCa");
+            setcategoryState("Retail and Shops");
             setsubCategory("none");
             scrollToStart();
           }}
-          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#FF4F4F] ${
-            categoryState === "HoReCa"
+          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#FF65B8] ${
+            categoryState === "Retail and Shops"
               ? "border-black"
               : categoryState === "none"
               ? "border-[#F6F6F6]"
               : "opacity-30"
           } ${subCategory !== "none" ? "opacity-30 border-white" : ""}`}>
-          HoReCa{" "}
+          Retail and Shops{" "}
           <img
-            src="/images/hat.svg"
+            src="/images/categories/delivery_transport_button.svg"
             alt="hat"
             className="min-w-[22px] max-w-[22px]"
           />
@@ -204,7 +207,7 @@ const CategoriesMobile = ({ resetFilter }) => {
             }
           }}
           className={`px-4 py-3 rounded-lg items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 border-[#F6F6F6] hover:border-black bg-black ${
-            categoryState === "HoReCa" ? "flex" : "hidden"
+            categoryState === "Retail and Shops" ? "flex" : "hidden"
           } ${
             subCategory === "Job Sub-category #1"
               ? "bg-black text-white"
@@ -233,7 +236,7 @@ const CategoriesMobile = ({ resetFilter }) => {
             }
           }}
           className={`px-4 py-3 rounded-lg items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 border-[#F6F6F6] hover:border-black bg-black ${
-            categoryState === "HoReCa" ? "flex" : "hidden"
+            categoryState === "Retail and Shops" ? "flex" : "hidden"
           } ${
             subCategory === "Job Sub-category #2"
               ? "bg-black text-white"
@@ -262,7 +265,7 @@ const CategoriesMobile = ({ resetFilter }) => {
             }
           }}
           className={`px-4 py-3 rounded-lg items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 border-[#F6F6F6] hover:border-black bg-black ${
-            categoryState === "HoReCa" ? "flex" : "hidden"
+            categoryState === "Retail and Shops" ? "flex" : "hidden"
           } ${
             subCategory === "Job Sub-category #3"
               ? "bg-black text-white"
@@ -283,103 +286,111 @@ const CategoriesMobile = ({ resetFilter }) => {
         </button>
         {/* sub categories end */}
 
+        {/* Delivery & Transportation */}
         <button
           onClick={() => {
-            if (categoryState === "Catering") {
+            if (categoryState === "Delivery & Transportation") {
               setcategoryState("none");
               setsubCategory("none");
             } else {
-              setcategoryState("Catering");
+              setcategoryState("Delivery & Transportation");
               setsubCategory("none");
             }
           }}
-          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#D0B387] ${
-            categoryState === "Catering"
+          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#FF5353] ${
+            categoryState === "Delivery & Transportation"
               ? "border-black"
               : categoryState === "none"
               ? "border-[#F6F6F6]"
               : "opacity-30"
-          } ${categoryState === "HoReCa" ? "hidden" : ""}`}>
-          Catering{" "}
+          } ${categoryState === "Retail and Shops" ? "hidden" : ""}`}>
+          Delivery & Transportation{" "}
           <img
-            src="/images/hat.svg"
+            src="/images/categories/retail_shops_button.svg"
             alt="hat"
             className="min-w-[22px] max-w-[22px]"
           />
         </button>
+
+        {/* logistics and warehouse */}
         <button
           onClick={() => {
-            if (categoryState === "Marketing") {
+            if (categoryState === "Logistics & Warehouse") {
               setcategoryState("none");
               setsubCategory("none");
             } else {
-              setcategoryState("Marketing");
+              setcategoryState("Logistics & Warehouse");
               setsubCategory("none");
             }
           }}
-          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#39DD1E] ${
-            categoryState === "Marketing"
+          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#37D2A4] ${
+            categoryState === "Logistics & Warehouse"
               ? "border-black"
               : categoryState === "none"
               ? "border-[#F6F6F6]"
               : "opacity-30"
-          } ${categoryState === "HoReCa" ? "hidden" : ""}`}>
-          Marketing{" "}
+          } ${categoryState === "Retail and Shops" ? "hidden" : ""}`}>
+          Logistics & Warehouse{" "}
           <img
-            src="/images/hat.svg"
+            src="/images/categories/logistics_warehouse_button.svg"
             alt="hat"
             className="min-w-[22px] max-w-[22px]"
           />
         </button>
+
+        {/* Gym & Sports */}
         <button
           onClick={() => {
-            if (categoryState === "Gastronomy") {
+            if (categoryState === "Gym & Sports") {
               setcategoryState("none");
               setsubCategory("none");
             } else {
-              setcategoryState("Gastronomy");
+              setcategoryState("Gym & Sports");
               setsubCategory("none");
             }
           }}
-          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#7E1EDD] ${
-            categoryState === "Gastronomy"
+          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#FFD02A] ${
+            categoryState === "Gym & Sports"
               ? "border-black"
               : categoryState === "none"
               ? "border-[#F6F6F6]"
               : "opacity-30"
-          } ${categoryState === "HoReCa" ? "hidden" : ""}`}>
-          Gastronomy{" "}
+          } ${categoryState === "Retail and Shops" ? "hidden" : ""}`}>
+          Gym & Sports{" "}
           <img
-            src="/images/hat.svg"
+            src="/images/categories/gym_sports_button.svg"
             alt="hat"
             className="min-w-[22px] max-w-[22px]"
           />
         </button>
+
+        {/* Maintenance & Construction */}
         <button
           onClick={() => {
-            if (categoryState === "Racer") {
+            if (categoryState === "Maintenance & Construction") {
               setcategoryState("none");
               setsubCategory("none");
             } else {
-              setcategoryState("Racer");
+              setcategoryState("Maintenance & Construction");
               setsubCategory("none");
             }
           }}
-          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#DD1E1E] ${
-            categoryState === "Racer"
+          className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black bg-[#B93AE5] ${
+            categoryState === "Maintenance & Construction"
               ? "border-black"
               : categoryState === "none"
               ? "border-[#F6F6F6]"
               : "opacity-30"
-          } ${categoryState === "HoReCa" ? "hidden" : ""}`}>
-          Racer{" "}
+          } ${categoryState === "Retail and Shops" ? "hidden" : ""}`}>
+          Maintenance & Construction{" "}
           <img
-            src="/images/hat.svg"
+            src="/images/categories/maintenance_construction_button.svg"
             alt="hat"
             className="min-w-[22px] max-w-[22px]"
           />
         </button>
-        <button
+
+        {/* <button
           onClick={() => {
             if (categoryState === "YouTuber") {
               setcategoryState("none");
@@ -395,7 +406,7 @@ const CategoriesMobile = ({ resetFilter }) => {
               : categoryState === "none"
               ? "border-[#F6F6F6]"
               : "opacity-30"
-          } ${categoryState === "HoReCa" ? "hidden" : ""}`}>
+          } ${categoryState === "Retail and Shops" ? "hidden" : ""}`}>
           YouTuber{" "}
           <img
             src="/images/hat.svg"
@@ -419,21 +430,22 @@ const CategoriesMobile = ({ resetFilter }) => {
               : categoryState === "none"
               ? "border-[#F6F6F6]"
               : "opacity-30"
-          } ${categoryState === "HoReCa" ? "hidden" : ""}`}>
+          } ${categoryState === "Retail and Shops" ? "hidden" : ""}`}>
           Finances{" "}
           <img
             src="/images/hat.svg"
             alt="hat"
             className="min-w-[22px] max-w-[22px]"
           />
-        </button>
+        </button> */}
+
         <button
           onClick={() => {
             setmodal(true);
           }}
           className={`px-4 py-3 rounded-lg text-[#4B5563] flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 border-[#F6F6F6] hover:border-black bg-[#E7E7E7] ${
             categoryState !== "none" ? "opacity-30" : ""
-          } ${categoryState === "HoReCa" ? "hidden" : ""}`}>
+          } ${categoryState === "Retail and Shops" ? "hidden" : ""}`}>
           Show More{" "}
           <img
             src="/images/dots.svg"

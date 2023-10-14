@@ -32,18 +32,18 @@ function CategorySingle({
 
       <button
         onClick={() => {
-          if (categoryState === ct?.categoryName) {
-            setcategoryState("none");
-            setsubCategory("none");
-          } else {
-            setcategoryState(ct?.categoryName);
-            setsubCategory("none");
-          }
+          //     if (categoryState === ct?.categoryName) {
+          //       setcategoryState("none");
+          //       setsubCategory("none");
+          //     } else {
+          setcategoryState(ct?.categoryName);
+          setsubCategory("none");
+          //     }
         }}
         className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2  hover:border-black bg-[${
           ct?.categoryColor
         }] ${
-          categoryState === ct?.categoryName
+          categoryState === ct?.categoryName && subCategory === "none"
             ? "border-black"
             : categoryState === "none"
             ? "border-[#F6F6F6]"

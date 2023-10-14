@@ -28,7 +28,7 @@ const categoriesArray = [
     subCategories: ["Delivery Driver", "Food Delivery"],
   },
   {
-    categoryName: "Retail and Shops ",
+    categoryName: "Retail and Shops",
     categoryColor: "#FF65B8",
     iconPath: "/images/categories/delivery_transport_button.svg",
     subCategories: [
@@ -58,7 +58,7 @@ const categoriesArray = [
     ],
   },
   {
-    categoryName: "Maintenance & Constructor",
+    categoryName: "Maintenance & Construction",
     categoryColor: "#B93AE5",
     iconPath: "/images/categories/maintenance_construction_button.svg",
     subCategories: [
@@ -196,7 +196,7 @@ const Categories = ({ resetFilter }) => {
           }}
           className={`px-4 py-3 rounded-lg text-[#4B5563] flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 border-[#F6F6F6] hover:border-black bg-[#E7E7E7] ${
             categoryState !== "none" ? "opacity-30" : ""
-          } ${categoryState === "Retail and Shops" ? "hidden" : ""}`}>
+          } ${categoryState === "none" ? "" : "hidden"}`}>
           Show More{" "}
           <img
             src="/images/dots.svg"

@@ -21,10 +21,7 @@ const ControlMenu = (props) => {
   console.log(props.modal);
 
   return (
-    <div
-      className={`md2:sticky md2:top-[66px] bg-[#F6F6F6] z-20 pb-2 pt-2 ${
-        props.modal === false ? "" : "hidden"
-      }`}>
+    <div className={`md2:sticky md2:top-[66px] bg-[#F6F6F6] z-20 pb-2 pt-2 `}>
       <div className="relative">
         <div className="flex gap-3 justify-between flex-col lg7:flex-row whitespace-nowrap">
           <div className="flex items-center gap-3 w-full">

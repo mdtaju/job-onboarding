@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
+import CategoriesMobileSingle from "./CategoriesMobileSingle";
 import CategorySingle from "./CategorySingle";
 
 const categoriesArray = [
@@ -249,7 +250,7 @@ const CategoriesMobile = ({ resetFilter }) => {
                   </div>
 
                   <div className="bg-white flex items-center flex-col gap-3 flex-wrap">
-                    <button
+                    {/* <button
                       onClick={() => {
                         if (categoryState === "Real Estate") {
                           setcategoryState("none");
@@ -296,10 +297,21 @@ const CategoriesMobile = ({ resetFilter }) => {
                         alt="hat"
                         className="min-w-[22px] max-w-[22px]"
                       />
-                    </button>
+                    </button> */}
+                    {categoriesArray.map((ct, i) => (
+                      <CategoriesMobileSingle
+                        key={i}
+                        categoryState={categoryState}
+                        subCategory={subCategory}
+                        setsubCategory={setsubCategory}
+                        setcategoryState={setcategoryState}
+                        scrollToStart={scrollToStart}
+                        ct={ct}
+                      />
+                    ))}
 
                     {/* back button */}
-                    <button
+                    {/* <button
                       onClick={() => {
                         setcategoryState("none");
                         setsubCategory("none");
@@ -312,9 +324,9 @@ const CategoriesMobile = ({ resetFilter }) => {
                         alt="arrow-left"
                         className="min-w-[17px] max-w-[17px] rotate-90"
                       />
-                    </button>
+                    </button> */}
 
-                    <button
+                    {/* <button
                       onClick={() => {
                         if (categoryState === "HoReCa") {
                           setcategoryState("none");
@@ -345,10 +357,10 @@ const CategoriesMobile = ({ resetFilter }) => {
                         alt="hat"
                         className="min-w-[22px] max-w-[22px]"
                       />
-                    </button>
+                    </button> */}
 
                     {/* sub categories start */}
-                    <button
+                    {/* <button
                       onClick={() => {
                         if (subCategory === "Job Sub-category #1") {
                           setsubCategory("none");
@@ -445,10 +457,10 @@ const CategoriesMobile = ({ resetFilter }) => {
                           }
                         />
                       </svg>
-                    </button>
+                    </button> */}
                     {/* sub categories end */}
 
-                    <button
+                    {/* <button
                       onClick={() => {
                         if (categoryState === "Catering") {
                           setcategoryState("none");
@@ -664,7 +676,7 @@ const CategoriesMobile = ({ resetFilter }) => {
                         alt="hat"
                         className="min-w-[22px] max-w-[22px]"
                       />
-                    </button>
+                    </button> */}
 
                     <div className="sticky bottom-0 w-full bg-white py-3">
                       <button

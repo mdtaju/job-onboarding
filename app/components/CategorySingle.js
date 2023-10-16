@@ -40,9 +40,7 @@ function CategorySingle({
           setsubCategory("none");
           //     }
         }}
-        className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2  hover:border-black bg-[${
-          ct?.categoryColor
-        }] ${
+        className={`px-4 py-3 rounded-lg text-white flex items-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2  hover:border-black ${
           categoryState === ct?.categoryName && subCategory === "none"
             ? "border-black"
             : categoryState === "none"
@@ -54,7 +52,7 @@ function CategorySingle({
             : categoryState === ct?.categoryName
             ? ""
             : "hidden"
-        }`}>
+        }`} style={{background: ct?.categoryColor}}>
         {ct?.categoryName}{" "}
         <img
           src={ct?.iconPath}

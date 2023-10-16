@@ -2,79 +2,80 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import CategorySingle from "./CategorySingle";
 
-const categoriesArray = [
-  {
-    categoryName: "Restaurants & Bars",
-    categoryColor: "#FF9F47",
-    iconPath: "/images/categories/restaurant_bars_button.svg",
-    subCategories: [
-      "General Manager",
-      "Manager",
-      "Floor Manager",
-      "Bartender",
-      "Service Staff",
-    ],
-  },
-  {
-    categoryName: "Hotels",
-    categoryColor: "#5F9FFF",
-    iconPath: "/images/categories/hotels_button.svg",
-    subCategories: [],
-  },
-  {
-    categoryName: "Delivery & Transportation",
-    categoryColor: "#FF5353",
-    iconPath: "/images/categories/retail_shops_button.svg",
-    subCategories: ["Delivery Driver", "Food Delivery"],
-  },
-  {
-    categoryName: "Retail and Shops",
-    categoryColor: "#FF65B8",
-    iconPath: "/images/categories/delivery_transport_button.svg",
-    subCategories: [
-      "Shop Manager",
-      "Sales Assistance",
-      "Visual Merchandiser",
-      "Department Manager",
-      "Cashier",
-    ],
-  },
-  {
-    categoryName: "Logistics & Warehouse",
-    categoryColor: "#37D2A4",
-    iconPath: "/images/categories/logistics_warehouse_button.svg",
-    subCategories: ["Warehouse Worker", "Store Warehouse"],
-  },
-  {
-    categoryName: "Gym & Sports",
-    categoryColor: "#FFD02A",
-    iconPath: "/images/categories/gym_sports_button.svg",
-    subCategories: [
-      "Personal Trainer",
-      "Host",
-      "Fitness Instructor",
-      "Personal Coach",
-      "Dietitian",
-    ],
-  },
-  {
-    categoryName: "Maintenance & Construction",
-    categoryColor: "#B93AE5",
-    iconPath: "/images/categories/maintenance_construction_button.svg",
-    subCategories: [
-      "Property Manager",
-      "Maintenance Technician",
-      "Housekeeper",
-      "Security Officer",
-      "Tenant Coordinator",
-    ],
-  },
-];
 
 const Categories = ({ resetFilter }) => {
   const [categoryState, setcategoryState] = useState("none");
   const [modal, setmodal] = useState(false);
   const [subCategory, setsubCategory] = useState("none");
+
+  const categoriesArray = [
+    {
+      categoryName: "Restaurants & Bars",
+      categoryColor: "#FF9F47",
+      iconPath: "/images/categories/restaurant_bars_button.svg",
+      subCategories: [
+        "General Manager",
+        "Manager",
+        "Floor Manager",
+        "Bartender",
+        "Service Staff",
+      ],
+    },
+    {
+      categoryName: "Hotels",
+      categoryColor: "#5F9FFF",
+      iconPath: "/images/categories/hotels_button.svg",
+      subCategories: [],
+    },
+    {
+      categoryName: "Delivery & Transportation",
+      categoryColor: "#FF5353",
+      iconPath: "/images/categories/retail_shops_button.svg",
+      subCategories: ["Delivery Driver", "Food Delivery"],
+    },
+    {
+      categoryName: "Retail and Shops",
+      categoryColor: "#FF65B8",
+      iconPath: "/images/categories/delivery_transport_button.svg",
+      subCategories: [
+        "Shop Manager",
+        "Sales Assistance",
+        "Visual Merchandiser",
+        "Department Manager",
+        "Cashier",
+      ],
+    },
+    {
+      categoryName: "Logistics & Warehouse",
+      categoryColor: "#37D2A4",
+      iconPath: "/images/categories/logistics_warehouse_button.svg",
+      subCategories: ["Warehouse Worker", "Store Warehouse"],
+    },
+    {
+      categoryName: "Gym & Sports",
+      categoryColor: "#FFD02A",
+      iconPath: "/images/categories/gym_sports_button.svg",
+      subCategories: [
+        "Personal Trainer",
+        "Host",
+        "Fitness Instructor",
+        "Personal Coach",
+        "Dietitian",
+      ],
+    },
+    {
+      categoryName: "Maintenance & Construction",
+      categoryColor: "#B93AE5",
+      iconPath: "/images/categories/maintenance_construction_button.svg",
+      subCategories: [
+        "Property Manager",
+        "Maintenance Technician",
+        "Housekeeper",
+        "Security Officer",
+        "Tenant Coordinator",
+      ],
+    },
+  ];
 
   useEffect(() => {
     if (resetFilter) {

@@ -42,7 +42,7 @@ function CategoriesMobileSingle({
             scrollToStart();
           }
         }}
-        className={`w-full px-4 py-3 rounded-lg text-white flex items-center justify-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black ${
+        className={`w-full py-3 rounded-lg text-white flex items-center justify-center gap-2 flex-row-reverse font-semibold text-[15px] transition border-2 hover:border-black ${
           categoryState === ct?.categoryName && subCategory === "none"
             ? "border-black"
             : categoryState === "none"
@@ -56,7 +56,7 @@ function CategoriesMobileSingle({
             : "hidden"
         }`}
         style={{ background: ct?.categoryColor }}>
-        {ct?.categoryName}{" "}
+        <span>{ct?.categoryName}</span>{" "}
         <img
           src={ct?.iconPath}
           alt="hat"

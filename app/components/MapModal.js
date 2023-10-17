@@ -192,8 +192,7 @@ const MapModal = (props) => {
       )}
 
       {props.modal === true && (
-        <div
-          className={`w-full overflow-hidden h-[calc(100vh-260px)] z-[29] fixed bottom-0 left-0`}>
+        <div className={`w-full overflow-hidden h-[450px] z-[29]`}>
           <div className="leaflet-container relative">
             <button
               onClick={handleLiveLocation}

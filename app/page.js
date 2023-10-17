@@ -11,6 +11,7 @@ import ControlMenu from "./components/ControlMenu";
 
 // import "mapbox-gl/dist/mapbox-gl.css";
 import "maplibre-gl/dist/maplibre-gl.css";
+import Footer from "./components/Footer";
 import NoResult from "./components/NoResult";
 
 const MapBoxGL = dynamic(() => import("./components/MapBoxGL"), {
@@ -45,72 +46,77 @@ export default function Home() {
 
   return (
     <>
-      <div className="relative bg-[#F6F6F6] px-5 sm:px-0">
-        <Categories resetFilter={resetFilter} />
-        <CategoriesMobile resetFilter={resetFilter} />
-        <div
-          className={`grid grid-cols-1 lg4:grid-cols-[1fr,1fr] lg6:grid-cols-[1fr,500px] lg8:grid-cols-[1fr,560px] gap-5 bg-transparent ${
-            modal === false ? "mb-5" : "mb-2"
-          }`}>
-          {/*left section starts */}
-          <div>
-            {/* the search sticky section starts */}
-            <ControlMenu
-              modal={modal}
-              setResetFilter={setResetFilter}
-              resetFilter={resetFilter}
-            />
-            {/* the search sticky section ends */}
+      <div className="w-full max-w-[1500px] mx-auto px-0 sm:px-5">
+        <div className="min-h-[calc(100vh-250px)]">
+          <div className="relative bg-[#F6F6F6] px-5 sm:px-0">
+            <Categories resetFilter={resetFilter} />
+            <CategoriesMobile resetFilter={resetFilter} />
+            <div
+              className={`grid grid-cols-1 lg4:grid-cols-[1fr,1fr] lg6:grid-cols-[1fr,500px] lg8:grid-cols-[1fr,560px] gap-5 bg-transparent ${
+                modal === false ? "mb-5" : "mb-2"
+              }`}>
+              {/*left section starts */}
+              <div>
+                {/* the search sticky section starts */}
+                <ControlMenu
+                  modal={modal}
+                  setResetFilter={setResetFilter}
+                  resetFilter={resetFilter}
+                />
+                {/* the search sticky section ends */}
 
-            {modal === false ? (
-              <>
-                <div className="flex flex-col gap-3">
-                  {jobData?.length ? (
-                    <>
-                      {jobData?.map((job, i) => (
-                        <JobCard
-                          key={i}
-                          loading={loading}
-                          homeView={true}
-                          job={job}
-                        />
-                      ))}
-                    </>
-                  ) : (
-                    <NoResult setResetFilter={setResetFilter} />
-                  )}
+                {modal === false ? (
+                  <>
+                    <div className="flex flex-col gap-3">
+                      {jobData?.length ? (
+                        <>
+                          {jobData?.map((job, i) => (
+                            <JobCard
+                              key={i}
+                              loading={loading}
+                              homeView={true}
+                              job={job}
+                            />
+                          ))}
+                        </>
+                      ) : (
+                        <NoResult setResetFilter={setResetFilter} />
+                      )}
+                    </div>
+
+                    <div className="grid gird-cols-1 sm:grid-cols-2 gap-3 mt-3">
+                      <CompanyCard loading={loading} />
+                      <CompanyCard loading={loading} />
+                      <CompanyCard loading={loading} />
+                      <CompanyCard loading={loading} />
+                      <CompanyCard loading={loading} />
+                      <CompanyCard loading={loading} />
+                    </div>
+                  </>
+                ) : null}
+              </div>
+              {/*left section end */}
+
+              {/*right section starts */}
+              <div className="hidden lg4:block">
+                <div className="sticky top-[88px] mt-3">
+                  {/* map starts */}
+
+                  {/* loading prop for loading spinner */}
+                  {/* <Map loading={loading}/> */}
+                  <MapBoxGL />
+                  {/* map ends */}
                 </div>
-
-                <div className="grid gird-cols-1 sm:grid-cols-2 gap-3 mt-3">
-                  <CompanyCard loading={loading} />
-                  <CompanyCard loading={loading} />
-                  <CompanyCard loading={loading} />
-                  <CompanyCard loading={loading} />
-                  <CompanyCard loading={loading} />
-                  <CompanyCard loading={loading} />
-                </div>
-              </>
-            ) : null}
-          </div>
-          {/*left section end */}
-
-          {/*right section starts */}
-          <div className="hidden lg4:block">
-            <div className="sticky top-[88px] mt-3">
-              {/* map starts */}
-
-              {/* loading prop for loading spinner */}
-              {/* <Map loading={loading}/> */}
-              <MapBoxGL />
-              {/* map ends */}
+              </div>
+              {/*right section end */}
             </div>
           </div>
-          {/*right section end */}
+
+          {/* mobile map */}
+          <MapModal modal={modal} setModal={setModal} />
         </div>
       </div>
-
-      {/* mobile map */}
-      <MapModal modal={modal} setModal={setModal} />
+      {!modal && <Footer />}
     </>
   );
 }

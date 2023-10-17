@@ -341,7 +341,7 @@ const MapModal = (props) => {
                   onClose={() => setSelectedJob(null)}
                   closeOnClick={false}
                   closeButton={false}
-                  offset={22}>
+                  offset={24}>
                   <div
                     className={`customScrollMarker map_popup_scrollbar bg-white space-y-[6px] p-[6px] h-fit max-h-[186px] ${
                       selectedJob.jobs.length > 3

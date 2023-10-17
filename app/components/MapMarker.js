@@ -42,15 +42,10 @@ function MapMarker({ cluster, markerCenterHandler, setSelectedJob, bounce }) {
           ref={markerBtnRef}
           className={`marker_btn group ${bounce ? "animate-bounce" : ""}`}
           style={{
-            // width: "65px",
-            // height: "65px",
-            // backgroundColor: markerOuterColor,
-            // display: "grid",
-            // placeItems: "center",
-            // borderRadius: "50%",
+            width: "50px",
+            height: "50px",
             position: "relative",
             transition: "all ease-in-out 0.2s",
-            // pressColor #C4D8F7
           }}
           type="button"
           onClick={(e) => {
@@ -60,7 +55,6 @@ function MapMarker({ cluster, markerCenterHandler, setSelectedJob, bounce }) {
               setSelectedJob(cluster);
             }, 200);
           }}
-          //     onMouseOver={toggleHover}
           onMouseEnter={() => setIsHover("hover")}
           onMouseLeave={() => setIsHover("not_hover")}>
           {/* home icon svg */}
@@ -90,14 +84,11 @@ function MapMarker({ cluster, markerCenterHandler, setSelectedJob, bounce }) {
               display: "grid",
               placeItems: "center",
               borderRadius: "999px",
-              // zIndex:
             }}
-            dangerouslySetInnerHTML={{ __html: cluster.icon }}>
-            {/* <span ></span> */}
-          </div>
+            dangerouslySetInnerHTML={{ __html: cluster.icon }}></div>
           {/* job count badge */}
           {cluster.jobs.length > 1 && (
-            <div className="absolute top-[-31px] right-[-34px] rounded-full w-[24px] h-[24px] grid place-items-center leading-none bg-white text-[11px]">
+            <div className="absolute top-[-7px] right-[-8px] rounded-full w-[24px] h-[24px] grid place-items-center leading-none bg-white text-[11px]">
               {cluster.jobs.length > 9 ? "9+" : cluster.jobs.length}
             </div>
           )}

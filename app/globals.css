@@ -77,6 +77,23 @@ body {
   background: #e8e8e8;
 }
 
+/* custom scroll for map marker */
+.customScrollMarker::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.customScrollMarker::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 0px;
+}
+
+.customScrollMarker::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #e8e8e8;
+}
+
 /* mapbox */
 .mapboxgl-popup-content,
 .maplibregl-popup-content {

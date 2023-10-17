@@ -13,7 +13,7 @@ function NoResult({ setResetFilter }) {
           </p>
           <button
             onClick={() => setResetFilter(true)}
-            className="w-fit px-3 py-1 flex items-center gap-1 mx-auto text-[15px] bg-white text-[#374151] border-2 border-gray-200 h-[40px] rounded-lg shadow-sm font-semibold">
+            className="w-fit px-3 py-1 flex items-center gap-1 mx-auto text-[15px] bg-white hover:bg-[#f2f2f2] text-[#374151] border-2 border-gray-200 h-[40px] rounded-lg shadow-sm font-semibold">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

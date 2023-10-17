@@ -102,7 +102,7 @@ const CategoriesMobile = ({ resetFilter }) => {
     <>
       <div
         ref={scrollableDivRef}
-        className="customScroll bg-[#F6F6F6] sticky top-0 z-30 flex md2:hidden items-center gap-3 whitespace-nowrap overflow-x-auto pt-2 pb-1.5">
+        className="customScrollMobile bg-[#F6F6F6] sticky top-0 z-30 flex md2:hidden items-center gap-3 whitespace-nowrap overflow-x-auto pt-2 pb-1.5">
         {/* mobile dropdown button */}
         <button
           onClick={() => {

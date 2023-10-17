@@ -55,7 +55,7 @@ function Terms() {
                   ducimus!
                 </p>
                 <h4 className="mt-3 text-[15px]">Additional Text</h4>
-                <button className="flex items-center border-2 mt-2 border-gray-300 px-4 py-2 gap-1 text-[15px] rounded-lg font-bold shadow-sm">
+                <button className="flex items-center border-2 mt-2 border-gray-300 px-4 py-2 gap-1 text-[15px] rounded-lg font-bold shadow-sm hover:bg-[#f2f2f2]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -131,7 +131,7 @@ function Terms() {
                 </p>
                 <h4 className="mt-3 text-[15px]">Additional Text</h4>
                 <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-4 w-fit">
-                  <button className="flex items-center border-2 border-gray-300 px-4 py-2 gap-1 text-[15px] rounded-lg font-bold shadow-sm">
+                  <button className="flex items-center border-2 border-gray-300 px-4 py-2 gap-1 text-[15px] rounded-lg font-bold shadow-sm hover:bg-[#f2f2f2]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -147,7 +147,7 @@ function Terms() {
                     </svg>
                     Download
                   </button>
-                  <button className="flex items-center border-2 border-gray-300 px-4 py-2 gap-1 text-[15px] rounded-lg font-bold shadow-sm">
+                  <button className="flex items-center border-2 border-gray-300 px-4 py-2 gap-1 text-[15px] rounded-lg font-bold shadow-sm hover:bg-[#f2f2f2]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -163,7 +163,7 @@ function Terms() {
                     </svg>
                     Download
                   </button>
-                  <button className="flex items-center border-2 border-gray-300 px-4 py-2 gap-1 text-[15px] rounded-lg font-bold shadow-sm">
+                  <button className="flex items-center border-2 border-gray-300 px-4 py-2 gap-1 text-[15px] rounded-lg font-bold shadow-sm hover:bg-[#f2f2f2]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -179,7 +179,7 @@ function Terms() {
                     </svg>
                     Download
                   </button>
-                  <button className="flex items-center border-2 border-gray-300 px-4 py-2 gap-1 text-[15px] rounded-lg font-bold shadow-sm">
+                  <button className="flex items-center border-2 border-gray-300 px-4 py-2 gap-1 text-[15px] rounded-lg font-bold shadow-sm hover:bg-[#f2f2f2]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

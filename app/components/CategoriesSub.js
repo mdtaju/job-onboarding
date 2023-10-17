@@ -23,7 +23,7 @@ function CategoriesSub({
         } ${
           subCategory === subCt
             ? "bg-[#1F2937] text-white"
-            : "bg-gray-200 text-gray-800"
+            : "bg-gray-200 text-gray-800 opacity-30"
         }`}>
         {subCt}{" "}
         {categoryName === "Restaurants & Bars" && (

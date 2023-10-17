@@ -104,7 +104,7 @@ export default function Job() {
                         We have redirected you to an external application form
                       </div>
                       <Link href={"/"}>
-                        <button className="text-[15px] text-[#6B7280] font-bold mt-2.5 py-2 px-3 border-2 border-gray-200 rounded-lg">
+                        <button className="text-[15px] text-[#6B7280] font-bold mt-2.5 py-2 px-3 border-2 border-gray-200 rounded-lg hover:bg-[#f2f2f2]">
                           Go back to main page
                         </button>
                       </Link>

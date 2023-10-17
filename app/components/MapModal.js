@@ -344,7 +344,7 @@ const MapModal = (props) => {
                   closeButton={false}
                   offset={22}>
                   <div
-                    className={`customScroll map_popup_scrollbar bg-white space-y-[6px] p-[6px] h-fit max-h-[186px] ${
+                    className={`customScrollMarker map_popup_scrollbar bg-white space-y-[6px] p-[6px] h-fit max-h-[186px] ${
                       selectedJob.jobs.length > 3
                         ? "overflow-scroll"
                         : "overflow-hidden"

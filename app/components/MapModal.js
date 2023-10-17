@@ -20,6 +20,7 @@ const MapModal = (props) => {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const markerBtnRef = useRef(null);
+  const geoControlRef = useRef(null);
   const popRef = useRef(null);
   const [isLiveLocationActive, setIsLiveLocationActive] = useState(false);
   const [viewPort, setViewPort] = useState({

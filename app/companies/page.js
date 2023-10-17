@@ -69,7 +69,7 @@ function Companies() {
 
           {/*right section starts */}
           <div className="hidden lg4:block">
-            <div className="sticky top-[80px] mt-3">
+            <div className="sticky top-[88px] mt-[10px]">
               {/* map starts */}
 
               {/* loading prop for loading spinner */}

@@ -2,7 +2,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import CategorySingle from "./CategorySingle";
 
-
 const Categories = ({ resetFilter }) => {
   const [categoryState, setcategoryState] = useState("none");
   const [modal, setmodal] = useState(false);

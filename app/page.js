@@ -96,7 +96,7 @@ export default function Home() {
 
           {/*right section starts */}
           <div className="hidden lg4:block">
-            <div className="sticky top-[80px] mt-3">
+            <div className="sticky top-[88px] mt-3">
               {/* map starts */}
 
               {/* loading prop for loading spinner */}

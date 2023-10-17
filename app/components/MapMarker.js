@@ -40,14 +40,14 @@ function MapMarker({ cluster, markerCenterHandler, setSelectedJob, bounce }) {
         {/* company location */}
         <button
           ref={markerBtnRef}
-          className={`marker_btn ${bounce ? "animate-bounce" : ""}`}
+          className={`marker_btn group ${bounce ? "animate-bounce" : ""}`}
           style={{
-            width: "65px",
-            height: "65px",
-            backgroundColor: markerOuterColor,
-            display: "grid",
-            placeItems: "center",
-            borderRadius: "50%",
+            // width: "65px",
+            // height: "65px",
+            // backgroundColor: markerOuterColor,
+            // display: "grid",
+            // placeItems: "center",
+            // borderRadius: "50%",
             position: "relative",
             transition: "all ease-in-out 0.2s",
             // pressColor #C4D8F7
@@ -63,26 +63,44 @@ function MapMarker({ cluster, markerCenterHandler, setSelectedJob, bounce }) {
           //     onMouseOver={toggleHover}
           onMouseEnter={() => setIsHover("hover")}
           onMouseLeave={() => setIsHover("not_hover")}>
-          {/* job count badge */}
-          {cluster.jobs.length > 1 && (
-            <div className="absolute top-[3px] right-[-4px] rounded-full w-[24px] h-[24px] grid place-items-center leading-none bg-white text-[11px]">
-              {cluster.jobs.length > 9 ? "9+" : cluster.jobs.length}
-            </div>
-          )}
           {/* home icon svg */}
           <div
             style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: isHover === "hover" ? "56px" : "50px",
+              height: isHover === "hover" ? "56px" : "50px",
+              opacity: isHover === "pressed" ? 1 : 0.2,
+              borderRadius: "999px",
+              background: cluster.CategoryColour,
+              transition: "all ease-in-out 0.2s",
+            }}></div>
+
+          <div
+            style={{
+              position: "absolute",
               width: "50px",
               height: "50px",
-              background:
-                isHover === "pressed" ? "#C4D8F7" : cluster.CategoryColour,
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              background: cluster.CategoryColour,
               display: "grid",
               placeItems: "center",
               borderRadius: "999px",
+              // zIndex:
             }}
             dangerouslySetInnerHTML={{ __html: cluster.icon }}>
             {/* <span ></span> */}
           </div>
+          {/* job count badge */}
+          {cluster.jobs.length > 1 && (
+            <div className="absolute top-[-31px] right-[-34px] rounded-full w-[24px] h-[24px] grid place-items-center leading-none bg-white text-[11px]">
+              {cluster.jobs.length > 9 ? "9+" : cluster.jobs.length}
+            </div>
+          )}
         </button>
       </Marker>
     </>

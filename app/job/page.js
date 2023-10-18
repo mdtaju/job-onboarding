@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-// import { useRouter as nextRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ApplyForm from "../components/ApplyForm";
 import JobCard from "../components/JobCard";
@@ -15,9 +14,6 @@ import JobInfoCard from "../components/JobInfoCard";
 import ShareButton from "../components/ShareButton";
 
 const Map = dynamic(() => import("../components/Map"), {
-  ssr: false,
-});
-const MapModal = dynamic(() => import("../components/MapModal"), {
   ssr: false,
 });
 

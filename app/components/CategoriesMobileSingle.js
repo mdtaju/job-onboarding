@@ -28,14 +28,9 @@ function CategoriesMobileSingle({
 
       <button
         onClick={() => {
-          //     if (categoryState === "HoReCa") {
-          //       setcategoryState("none");
-          //       setsubCategory("none");
-          //     } else {
           setcategoryState(ct?.categoryName);
           setsubCategory("none");
           scrollToStart();
-          //     }
 
           if (subCategory !== "none") {
             setcategoryState(ct?.categoryName);

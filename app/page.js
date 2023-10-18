@@ -8,18 +8,13 @@ import JobCard from "./components/JobCard";
 import dynamic from "next/dynamic";
 import JobList from "../src/utilities/db";
 import ControlMenu from "./components/ControlMenu";
-
-// import "mapbox-gl/dist/mapbox-gl.css";
-import "maplibre-gl/dist/maplibre-gl.css";
 import Footer from "./components/Footer";
 import NoResult from "./components/NoResult";
 
 const MapBoxGL = dynamic(() => import("./components/MapBoxGL"), {
   ssr: false,
 });
-// const Map = dynamic(() => import("./components/Map"), {
-//   ssr: false,
-// });
+
 const MapModal = dynamic(() => import("./components/MapModal"), {
   ssr: false,
 });

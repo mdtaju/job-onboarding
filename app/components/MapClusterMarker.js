@@ -45,10 +45,6 @@ function MapClusterMarker({ cluster, clusterHandler }) {
           }}>
           <div
             className="cluster-marker cursor-pointer"
-            // style={{
-            //   width: `${30 + (pointCount / points.length) * 20}px`,
-            //   height: `${30 + (pointCount / points.length) * 20}px`,
-            // }}
             style={{
               background: "rgba(255, 255, 255, 0.70)",
             }}>
@@ -61,46 +57,3 @@ function MapClusterMarker({ cluster, clusterHandler }) {
 }
 
 export default MapClusterMarker;
-
-{
-  /* <Marker
-                key={`cluster-${cluster.id}`}
-                latitude={latitude}
-                longitude={longitude}
-                onClick={() => {
-                  const expansionZoom = Math.min(
-                    supercluster.getClusterExpansionZoom(cluster.id),
-                    20
-                  );
-                  setClusterInnerBg("rgba(125, 125, 125, 0.70)");
-                  setTimeout(() => {
-                    mapRef.current?.easeTo({
-                      center: [longitude, latitude],
-                      zoom: expansionZoom,
-                      duration: 500,
-                    });
-                  }, 200);
-                }}>
-                <div
-                  className="cluster_marker_outer"
-                  style={{ background: `rgba(233, 233, 233, 0.70)` }}>
-                  <div
-                    className="cluster_marker_inner"
-                    style={{
-                      background: clusterInnerBg,
-                    }}>
-                    <div
-                      className="cluster-marker cursor-pointer"
-                      // style={{
-                      //   width: `${30 + (pointCount / points.length) * 20}px`,
-                      //   height: `${30 + (pointCount / points.length) * 20}px`,
-                      // }}
-                      style={{
-                        background: `rgba(255, 255, 255, 0.70)`,
-                      }}>
-                      {pointCount}
-                    </div>
-                  </div>
-                </div>
-              </Marker> */
-}

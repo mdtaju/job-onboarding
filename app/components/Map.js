@@ -9,7 +9,7 @@ import useSupercluster from "use-supercluster";
 import MapClusterMarker from "./MapClusterMarker";
 import MapMarker from "./MapMarker";
 
-const Map = (props) => {
+const Map = () => {
   const jobData = JobList;
   const [selectedJob, setSelectedJob] = useState(null);
   const mapRef = useRef(null);
@@ -94,7 +94,7 @@ const Map = (props) => {
   }
 
   return (
-    <div className="relative bg-white flex items-center justify-center w-full overflow-hidden rounded-xl h-[400px] lg4:h-[500px]">
+    <div className="relative bg-white flex items-center justify-center w-full overflow-hidden rounded-xl h-[450px] lg4:h-[500px]">
       <div className="leaflet-container">
         <ReactMapGL
           {...viewPort}
@@ -117,9 +117,6 @@ const Map = (props) => {
             const { latitude, longitude } = cluster;
             // the point may be either a cluster or a job point
             const { cluster: isCluster } = cluster.properties;
-
-            //           52.004001372806805,
-            // longitude: 4.373833115738175,
 
             let isBounce = false;
             if (

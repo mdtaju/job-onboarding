@@ -8,15 +8,10 @@ import ControlMenu from "../components/ControlMenu";
 const MapBoxGL = dynamic(() => import("../components/MapBoxGL"), {
   ssr: false,
 });
-// const Map = dynamic(() => import("./components/Map"), {
-//   ssr: false,
-// });
 const MapModal = dynamic(() => import("../components/MapModal"), {
   ssr: false,
 });
 
-// import "mapbox-gl/dist/mapbox-gl.css";
-import "maplibre-gl/dist/maplibre-gl.css";
 import Footer from "../components/Footer";
 
 function Companies() {
@@ -29,12 +24,6 @@ function Companies() {
       setloading(false);
     }, 1000);
   }, []);
-
-  // reset filter
-  // useEffect(() => {
-  //   if (resetFilter) setJobData(JobList);
-  //   if (!resetFilter) setJobData([]);
-  // }, [resetFilter]);
 
   return (
     <>

@@ -9,7 +9,6 @@ const JobCard = (props) => {
     CompanyLogoSvg,
     Salary,
     JobLocation,
-    ContractType,
     English,
     Hybrid: isHybrid,
     Remote: IsJobRemote,
@@ -17,9 +16,6 @@ const JobCard = (props) => {
     Tag2,
     Tag3,
     New,
-    CompanyLocation,
-    CompanyCategory,
-    ComapnyCategoryColour,
   } = props.job || {};
 
   const [heart, setheart] = useState(false);

@@ -9,11 +9,9 @@ import CompanyInfoCard from "../components/CompanyInfoCard";
 import Footer from "../components/Footer";
 import JobCard from "../components/JobCard";
 import ShareButton from "../components/ShareButton";
-// import CompanyMap from "../components/CompanyMap";
 const CompanyMap = dynamic(() => import("../components/CompanyMap"), {
   ssr: false,
 });
-// import Slider from "../components/Slider";
 const SliderComponent = dynamic(() => import("../components/Slider"), {
   ssr: false,
 });

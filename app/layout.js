@@ -1,6 +1,6 @@
+// import "mapbox-gl/dist/mapbox-gl.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import Cookies from "./components/Cookies";
-// import Footer from "./components/Footer";
 import Header from "./components/Header";
 import "./globals.css";
 

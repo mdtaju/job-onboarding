@@ -1,11 +1,10 @@
 import Slider from "react-slick";
 
 function NextArrow(props) {
-  const { className, style, onClick } = props;
+  const { onClick } = props;
   return (
     <div
       className={`absolute right-3 top-[50%] translate-y-[-50%] z-50 cursor-pointer`}
-      // style={{ ...style, display: "block" }}
       onClick={onClick}>
       <svg
         width="50"
@@ -72,11 +71,10 @@ function NextArrow(props) {
 }
 
 function PrevArrow(props) {
-  const { className, style, onClick } = props;
+  const { onClick } = props;
   return (
     <div
       className={`absolute left-3 top-[50%] translate-y-[-50%] z-50 cursor-pointer`}
-      // style={{ ...style, display: "block" }}
       onClick={onClick}>
       <svg
         width="50"

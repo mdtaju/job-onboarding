@@ -36,9 +36,6 @@ const Header = () => {
                 Post a job
               </Link>
             </div>
-            {/* <button className="hidden sm:flex px-3 py-3 rounded-md border-[1.5px] border-gray-200 transition hover:bg-[#f2f2f2]">
-              <img src="/images/burger.svg" alt="burger menu" />
-            </button> */}
             <button
               onClick={() => {
                 setmenu(!menu);

@@ -67,9 +67,6 @@ const SearchButton = ({ resetFilter }) => {
             onFocus={() => {
               setshowSuggestion(true);
             }}
-            // onBlur={() => {
-            //   setshowSuggestion(false);
-            // }}
             onBlur={() => {
               setTimeout(() => {
                 setshowSuggestion(false);

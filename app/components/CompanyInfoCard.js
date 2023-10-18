@@ -1,10 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
 
 const CompanyInfoCard = (props) => {
-  const [heart, setheart] = useState(false);
-
   return (
     <>
       {props.loading === false ? (

@@ -11,15 +11,10 @@ import MapClusterMarker from "./MapClusterMarker";
 import MapMarker from "./MapMarker";
 
 const MapModal = (props) => {
-  const [showButton, setShowButton] = useState(true);
-  const [scrollPos, setScrollPos] = useState(0);
-
   // new map state - mapbox
   const jobData = JobList;
   const [selectedJob, setSelectedJob] = useState(null);
   const mapRef = useRef(null);
-  const markerRef = useRef(null);
-  const markerBtnRef = useRef(null);
   const geoControlRef = useRef(null);
   const popRef = useRef(null);
   const [isLiveLocationActive, setIsLiveLocationActive] = useState(false);
@@ -59,25 +54,6 @@ const MapModal = (props) => {
     zoom: viewPort.zoom,
     options: { radius: 75, maxZoom: 20 },
   });
-
-  useEffect(() => {
-    function handleScroll() {
-      const currentScrollPos = window.scrollY;
-      // setShowButton(currentScrollPos > scrollPos);
-      if (currentScrollPos < 400) {
-        setShowButton(false);
-      } else {
-        setShowButton(true);
-      }
-      setScrollPos(currentScrollPos);
-    }
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scrollPos]);
 
   // popup close on random click
   useEffect(() => {
@@ -123,22 +99,11 @@ const MapModal = (props) => {
     }, 200);
   };
 
-  const handleLiveLocation = () => {
-    setIsLiveLocationActive((prevState) => !prevState);
-    mapRef.current?.easeTo({
-      center: [coords?.longitude, coords?.latitude],
-      zoom: 10,
-      duration: 500,
-    });
-  };
-
   function geoLocateEvent(e) {
-    const { latitude, longitude, accuracy } = e.coords;
-    console.log(e);
+    const { latitude, longitude } = e.coords;
 
     mapRef.current?.easeTo({
       center: [longitude, latitude],
-      // zoom: accuracy,
       duration: 500,
     });
   }
@@ -153,18 +118,8 @@ const MapModal = (props) => {
           }}
           className={`shadow-lg fixed bottom-5 left-1/2 -translate-x-1/2 items-center justify-center gap-2 bg-black whitespace-nowrap text-white w-[100px] h-[40px] rounded-full text-[15px] transition z-30 ${
             props.modal === false ? "flex lg4:hidden" : "hidden"
-          } ${showButton === true ? "" : "translate-y-[calc(100%+20px)]"}`}>
-          {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            viewBox="0 0 16 16">
-            <path
-              fillRule="evenodd"
-              d="M16 .5a.5.5 0 0 0-.598-.49L10.5.99 5.598.01a.5.5 0 0 0-.196 0l-5 1A.5.5 0 0 0 0 1.5v14a.5.5 0 0 0 .598.49l4.902-.98 4.902.98a.502.502 0 0 0 .196 0l5-1A.5.5 0 0 0 16 14.5V.5zM5 14.09V1.11l.5-.1.5.1v12.98l-.402-.08a.498.498 0 0 0-.196 0L5 14.09zm5 .8V1.91l.402.08a.5.5 0 0 0 .196 0L11 1.91v12.98l-.5.1-.5-.1z"
-            />
-          </svg> */}
+          } `}>
+          {/* ${showButton === true ? "" : "translate-y-[calc(100%+20px)]"} */}
           Map
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -353,71 +308,3 @@ const MapModal = (props) => {
 };
 
 export default MapModal;
-
-// custom live location btn
-{
-  /* <button
-              onClick={handleLiveLocation}
-              className="absolute group top-[10px] right-[10px] w-[30px] h-[30px] bg-white rounded-lg z-[2] border-2 border-gray-200 shadow-sm grid place-items-center hover:border-gray-300 active:border-gray-400 "> */
-}
-{
-  /* active and normal svg */
-}
-// {isLiveLocationActive ? (
-//   <svg
-//     width="16"
-//     height="16"
-//     viewBox="0 0 16 16"
-//     fill="none"
-//     className="block group-hover:hidden "
-//     xmlns="http://www.w3.org/2000/svg">
-//     <path
-//       d="M14.082 2.182C14.1535 2.25353 14.2016 2.34506 14.22 2.44451C14.2384 2.54395 14.2262 2.64663 14.185 2.739L8.52805 15.467C8.48852 15.556 8.42386 15.6316 8.342 15.6843C8.26014 15.7371 8.16465 15.7648 8.06725 15.7641C7.96986 15.7633 7.8748 15.7342 7.79376 15.6801C7.71271 15.6261 7.64921 15.5496 7.61105 15.46L5.57005 10.694L0.803048 8.652C0.713773 8.6136 0.637623 8.55002 0.583912 8.46902C0.530201 8.38803 0.501258 8.29314 0.500621 8.19596C0.499985 8.09878 0.527683 8.00352 0.580328 7.92183C0.632973 7.84014 0.708283 7.77557 0.797048 7.736L13.525 2.079C13.6173 2.03805 13.7198 2.02597 13.819 2.04435C13.9182 2.06274 14.0096 2.11072 14.081 2.182H14.082Z"
-//       fill="#62A2FB"
-//     />
-//   </svg>
-// ) : (
-//   <svg
-//     width="14"
-//     height="14"
-//     viewBox="0 0 14 14"
-//     fill="#808080"
-//     className="block group-hover:hidden "
-//     xmlns="http://www.w3.org/2000/svg">
-//     <path
-//       d="M13.7175 0.28196C13.789 0.353495 13.8371 0.445024 13.8555 0.544467C13.8739 0.643911 13.8617 0.746592 13.8205 0.83896L8.16355 13.567C8.12402 13.656 8.05936 13.7315 7.9775 13.7843C7.89564 13.8371 7.80015 13.8648 7.70275 13.864C7.60536 13.8633 7.5103 13.8341 7.42926 13.7801C7.34821 13.7261 7.28471 13.6496 7.24655 13.56L5.20555 8.79396L0.438546 6.75196C0.349271 6.71356 0.273121 6.64998 0.21941 6.56898C0.165699 6.48799 0.136756 6.3931 0.136119 6.29592C0.135483 6.19874 0.163181 6.10348 0.215826 6.02179C0.268471 5.9401 0.343781 5.87553 0.432546 5.83596L13.1605 0.17896C13.2528 0.138008 13.3553 0.125929 13.4545 0.144313C13.5537 0.162697 13.6461 0.210682 13.7175 0.28196ZM1.88555 6.28396L5.78255 7.95396C5.90039 8.00476 5.9942 8.09892 6.04455 8.21696L7.71455 12.114L12.3785 1.61996L1.88555 6.28396Z"
-//       fill="#575757"
-//     />
-//   </svg>
-// )}
-{
-  /* hover svg */
-}
-// <svg
-//   width="16"
-//   height="16"
-//   viewBox="0 0 16 16"
-//   fill="none"
-//   className="hidden group-hover:block group-active:hidden "
-//   xmlns="http://www.w3.org/2000/svg">
-//   <path
-//     d="M14.082 2.182C14.1535 2.25353 14.2016 2.34506 14.22 2.44451C14.2384 2.54395 14.2262 2.64663 14.185 2.739L8.52805 15.467C8.48852 15.556 8.42386 15.6316 8.342 15.6843C8.26014 15.7371 8.16465 15.7648 8.06725 15.7641C7.96986 15.7633 7.8748 15.7342 7.79376 15.6801C7.71271 15.6261 7.64921 15.5496 7.61105 15.46L5.57005 10.694L0.803048 8.652C0.713773 8.6136 0.637623 8.55002 0.583912 8.46902C0.530201 8.38803 0.501258 8.29314 0.500621 8.19596C0.499985 8.09878 0.527683 8.00352 0.580328 7.92183C0.632973 7.84014 0.708283 7.77557 0.797048 7.736L13.525 2.079C13.6173 2.03805 13.7198 2.02597 13.819 2.04435C13.9182 2.06274 14.0096 2.11072 14.081 2.182H14.082Z"
-//     fill="#C8C8C8"
-//   />
-// </svg>
-{
-  /* active svg */
-}
-//   <svg
-//     width="16"
-//     height="16"
-//     viewBox="0 0 16 16"
-//     fill="none"
-//     className="hidden group-active:block"
-//     xmlns="http://www.w3.org/2000/svg">
-//     <path
-//       d="M14.082 2.182C14.1535 2.25353 14.2016 2.34506 14.22 2.44451C14.2384 2.54395 14.2262 2.64663 14.185 2.739L8.52805 15.467C8.48852 15.556 8.42386 15.6316 8.342 15.6843C8.26014 15.7371 8.16465 15.7648 8.06725 15.7641C7.96986 15.7633 7.8748 15.7342 7.79376 15.6801C7.71271 15.6261 7.64921 15.5496 7.61105 15.46L5.57005 10.694L0.803048 8.652C0.713773 8.6136 0.637623 8.55002 0.583912 8.46902C0.530201 8.38803 0.501258 8.29314 0.500621 8.19596C0.499985 8.09878 0.527683 8.00352 0.580328 7.92183C0.632973 7.84014 0.708283 7.77557 0.797048 7.736L13.525 2.079C13.6173 2.03805 13.7198 2.02597 13.819 2.04435C13.9182 2.06274 14.0096 2.11072 14.081 2.182H14.082Z"
-//       fill="#898989"
-//     />
-//   </svg>
-// </button>

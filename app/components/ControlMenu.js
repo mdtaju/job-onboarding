@@ -18,7 +18,6 @@ const ControlMenu = (props) => {
       setSalaryState(false);
     }
   }, [resetFilter]);
-  console.log(props.modal);
 
   return (
     <div className={`md2:sticky md2:top-[78px] bg-[#F6F6F6] z-20 pb-2 pt-2 `}>

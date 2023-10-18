@@ -3,9 +3,8 @@ import JobList from "@/src/utilities/jobs-example";
 import maplibregl from "maplibre-gl";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useGeolocated } from "react-geolocated";
 import { GeolocateControl } from "react-map-gl";
-import ReactMapGL, { Marker, Popup } from "react-map-gl/maplibre";
+import ReactMapGL, { Popup } from "react-map-gl/maplibre";
 import useSupercluster from "use-supercluster";
 import MapClusterMarker from "./MapClusterMarker";
 import MapMarker from "./MapMarker";
@@ -17,20 +16,11 @@ const MapModal = (props) => {
   const mapRef = useRef(null);
   const geoControlRef = useRef(null);
   const popRef = useRef(null);
-  const [isLiveLocationActive, setIsLiveLocationActive] = useState(false);
   const [viewPort, setViewPort] = useState({
     latitude: 51.9198816454355,
     longitude: 4.478242294834028,
     zoom: 10,
   });
-
-  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
-    useGeolocated({
-      positionOptions: {
-        enableHighAccuracy: false,
-      },
-      userDecisionTimeout: 5000,
-    });
 
   // get points for cluster
   const points = jobData.map((job) => ({
@@ -176,52 +166,9 @@ const MapModal = (props) => {
                 showUserLocation={true}
                 trackUserLocation={true}
                 showAccuracyCircle={true}
-                // style={{ opacity: 0 }}
                 positionOptions={{ enableHighAccuracy: true }}
               />
-              {/* live location marker  */}
-              {isGeolocationAvailable &&
-                isGeolocationEnabled &&
-                isLiveLocationActive && (
-                  <Marker
-                    latitude={coords?.latitude}
-                    longitude={coords.longitude}>
-                    <svg
-                      width="149"
-                      height="149"
-                      viewBox="0 0 149 149"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <circle
-                        cx="74.5"
-                        cy="74.5"
-                        r="74.3"
-                        fill="url(#paint0_radial_13_17939)"
-                        fill-opacity="0.2"
-                        stroke="#006AFF"
-                        stroke-width="0.4"
-                      />
-                      <circle cx="74.4999" cy="74.5" r="12.4167" fill="white" />
-                      <circle cx="74.5" cy="74.5" r="10.1591" fill="#62A2FB" />
-                      <defs>
-                        <radialGradient
-                          id="paint0_radial_13_17939"
-                          cx="0"
-                          cy="0"
-                          r="1"
-                          gradientUnits="userSpaceOnUse"
-                          gradientTransform="translate(74.5 74.5) rotate(90) scale(74.5)">
-                          <stop offset="0.338774" stop-color="#006AFF" />
-                          <stop
-                            offset="1"
-                            stop-color="#0066FF"
-                            stop-opacity="0.5"
-                          />
-                        </radialGradient>
-                      </defs>
-                    </svg>
-                  </Marker>
-                )}
+
               {/* clusters marker */}
               {clusters.map((cluster, i) => {
                 // the point may be either a cluster or a job point
